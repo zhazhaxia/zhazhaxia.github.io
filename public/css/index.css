@@ -13,7 +13,7 @@ html{overflow: hidden;}
 #player:hover{opacity: 1;}
 
 /*左边css*/
-#left{position: fixed;left:0;top:0;width:200px;height:100%;background: rgb(48,48,48);transition:0.5s;border-right: 1px solid #555;}
+#left{position: fixed;left:0;top:0;width:200px;height:100%;background: rgb(48,48,48);transition:0.5s;border-right: 1px solid #555;    z-index: 4;
 /*头像*/
 #left .head{width: 100%;height: 80px;z-index: 1;position: relative;background-color: #404040;border-bottom: 1px solid #555;}
 #left .head-pic{width: 80px;height: 80px;}
