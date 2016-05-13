@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>简爱FM</title>
+</head>
+<link type="text/css" rel="stylesheet" href="./css/body.css" />
+<!--[if lte IE 9]>
+<style>
+#search .search-text{ filter:alpha(opacity=40);}
+#ie-music-face{width:680px;height:440px;background:#333;position:absolute;left:0;top:0;z-index:0;filter:alpha(opacity=30);}
+.body-bg-big{display:block;position:absolute;top:0;left:0;z-index:1;}
+#music-bar .music-time{display:none;}
+#music-face .music-list-bar{background:#aaa;filter:alpha(opacity=50);}
+#music-face .music-list-bar .music-list-scroll-bar{background:#fff;filter:alpha(opacity=90);}
+.skindown{background:#333;filter:alpha(opacity=80);}
+.skinside{background:#333;filter:alpha(opacity=80);}
+#music-bar{}
+#side-bar{}
+</style>
+<![endif]-->
+<style>
+
+
+</style>
+<body>
+<!----------------------------------------背景开始---------------------->
+	<div class="body-bg"></div>
+    <img class="body-bg-big" src="./images/bg/big.jpg"/>
+<!----------------------------------------背景结束--------------------->
+<!----------------------------------------头部开始--------------------->
+    <div id="header">
+    	<div id="logo"></div>
+        <div id="search">
+        	<input type="text" title="歌曲"class="search-text" placeholder="歌曲、歌手" />
+            <div class="search-button" title="搜索歌曲"></div>
+            <div id="search-show">
+            	<div class="search-title">搜索结果<a>×</a></div>
+                <div class="search-result">
+                    <ul class="search-panel">
+                        <!---
+                        <li>
+                            <div class="search-name">容祖儿</div>
+                            <div class="search-singer">哈哈哈</div>
+                            <div class="search-album">×</div>
+                        </li>-->
+                    </ul>
+                    <div class="s-page">
+                        <input type="button" class="p-page"value="上一页"/>
+                        <select class="page">
+                        
+                            <!---插入选项<option value="4">第4页</option>
+                <option value="5" selected="selected">第5页</option>-->
+                        </select>
+                        <input type="button" class="n-page"value="下一页"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!----------------------------------------头部结束--------------------->
+<!----------------------------------------登录开始--------------------->
+    <div id="login">
+    	<div class="login-title skindown">登录<span>×</span>	
+        </div><div class="login-left">
+            	<table>
+                 <tr><td>邮箱</td><td><input type="text" class="email" /></td></tr>
+                 <tr><td>密码</td><td><input type="password" class="passwd" /></td></tr>
+                <tr><td></td><td>
+                	<input type="button" value="登录" class="login-button" /></td></tr>
+                    <tr><td></td><td>
+                    <a class="to-register">&nbsp;&nbsp;没有帐号？点击注册</a></td></tr>
+                </table>
+            </div>
+            <div class="login-right">
+            	<table>
+                <tr><td><a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用其他帐号登录</a>
+                </td></tr>
+                 <tr><td><a class="qq">使用腾讯帐号</a></td></tr>
+                 <tr><td><a class="wb">使用新微博浪帐号</a></td></tr>
+                <tr><td><a class="wx">使用微信帐号</a></td></tr>
+                </table>
+            </div>
+    </div>
+<!----------------------------------------登录结束--------------------->
+<!----------------------------------------注册开始--------------------->
+    <div id="register">
+    	<div class="login-title skindown">注册<span>×</span>	
+        </div><div class="login-left">
+            	<table>
+                 <tr><td><p>&nbsp;</p></td><td><p class="error"></p></td></tr>
+                 <tr><td><p>昵称</p></td><td><input type="text" placeholder="5-20个字符以内" class="reg-name" /></td></tr>
+                 <tr><td><p>邮箱</p></td><td><input type="text" class="reg-email" /></td></tr>
+                 <tr><td><p>密码</p></td><td><input type="password" class="reg-passwd" /></td></tr>
+                 <tr><td><p>确认密码</p></td><td><input type="password" class="reg-repasswd" /></td></tr>
+                <tr><td>&nbsp;</td><td>
+                	<input type="button" value="确定注册" class="register-button" /></td></tr>
+                </table>
+            </div>
+    </div>
+<!----------------------------------------注册结束--------------------->
+
+
+
+<!----------------------------------------音乐界面开始--------------------->
+    <!--中间滚动-->
+    <div id="middle">
+    	<div class="pic0 d-c"><img src="./images/lunbo/l1.png" alt="aaa" width="600" height="300" /><div class="d-b">▶</div></div>
+        <div class="pic1 d-c"><img src="./images/lunbo/l2.png" alt="aaa" width="600" height="300" /><div class="d-b">▶</div></div>
+        <div class="pic2 d-c"><img src="./images/lunbo/l3.png" alt="aaa" width="600" height="300" /><div class="d-b">▶</div></div>
+        <div class="pic3 d-c"><img src="./images/lunbo/l4.png" alt="aaa" width="600" height="300" /><div class="d-b">▶</div></div>
+        <div class="pic4 d-c"><img src="./images/lunbo/l5.png" alt="aaa" width="600" height="300" /><div class="d-b">▶</div></div>
+    </div>
+    <!--中下-->
+    <div id="middle-bottom">
+    	<div class="arrow">◆</div>
+    	<div class="m-new"></div>
+        <ul class="m-ul">
+        	<li><img src="./images/album/album1.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+            <li><img src="./images/album/album2.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+            <li><img src="./images/album/album3.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+            <li><img src="./images/album/album4.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+            <li><img src="./images/album/album5.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+            <li><img src="./images/album/album6.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+            <li><img src="./images/album/album7.png" alt="aaa" width="100" height="100" /><div class="d-b">▶</div></li>
+        </ul>
+    </div>
+<!-------------------------------------音乐界面结束--------------------->
+<!--------------------------侧栏开始---------------------------------->
+    <div id="side-bar" class="skinside">
+    	<!--登录后的头像开始--->
+    	<div class="music-login">
+        	<div class="im-d">
+            <div class="im-m"></div>
+        	<img src="./images/nologin.png" class="user-headpic" title="登录" alt="登录" width="100" height="100" />
+            </div>
+            <span><a>登录</a></span>
+            <div id="user-panel">
+            	<div class="user-title">个人信息</div>
+                <div class="user-close">×</div>
+                <div class="user-logout" title="退出登录">退出</div>
+                <div class="user-info">
+                	<div class="user-head" title="点击修改头像">
+                    	<img src="./images/head.jpg" width="150" height="150" alt="头像"/>
+                    </div>
+                     <!--用户详情--> 
+                    <div class="user-detail">
+                    	<div class="detail-name"><p></p><a>编辑资料</a></div>
+                        <div class="detail-des">个人介绍:</div>
+                        <div class="detail-where">所在地区：</div>
+                        <div class="detail-tel">联系方式：</div>
+                    </div>
+                     <!--修改用户信息--> 
+                    <div class="user-change">
+                    	<div>
+                        昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称<input type="text" class="u-name"value="" name="u-name"/>
+                        </div>
+                        <div>
+                        个人介绍<input type="text"class="u-des" value="" name="u-des"/>
+                        </div>
+                        <div>
+                        所在地区<input type="text"class="u-where"value=""name="u-where"/>
+                        </div>
+                        <div>
+                        联系方式<input type="text"class="u-tel" value="" name="u-tel"/>
+                        </div>
+                        <div>
+                        <input type="button"class="u-sub" value="确定" name="u-sub"/>
+                        </div>
+                    </div>
+                </div>
+                 <!--用户收藏列表--> 
+                <div class="user-collect">
+                	<div class="user-collect-list">
+                    	<div class="collect-title">我的收藏</div>
+                        <div class="collect-userlist">
+                        	<ul class="list-panel jerry-panel">
+                            <!--
+                                <li>
+                                    <div class="des-singer">发呆发</div>
+                                    <div class="des-song">歌发呆发曲</div>
+                                    <div class="des-album">×</div>
+                                </li>
+                               --> 
+                            </ul>
+                            <div class="list-bar jerry-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--音乐类型--->
+    	<div class="music-style">
+        	<!--音乐类型箭头--->
+        	<ul class="style-ul">
+            	<li><a>热门</a></li>
+                <li class="side-bar-select"><a>最新</a></li>
+                <li><a>华语</a></li>
+                <li><a>粤语</a></li>
+                <li><a>日韩</a></li>
+                <li><a>欧美</a></li>
+                <li><a>抒情</a></li>     
+            </ul>
+            <!--音乐类型显示--->
+            <div id="music-show">
+            	<div class="music-show-title"><span>热门</span><div class="music-show-close">×</div></div>
+                <!--音乐类型显示列表--->
+                <div class="music-list">
+                	<ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="music-app-download"><img src="images/app.png" width="22" height="32" alt="下载" />下载应用</div>
+    </div>
+<!----------------------------------侧栏结束---------------------------------------->
+
+<!----------------------------------------音乐控件开始--------------------->
+    <div id="music-bar" class="skindown">
+     <!--进度条--> 
+    	<div class="music-progress">
+        	<div class="music-songname"></div>
+        	<div class="music-time">00:00/00:00</div>
+        	<img src="" alt="" width="34" height="34" />
+        	<div class="music-progress-content">
+        		<div class="music-progress-top"></div>
+        		<div class="music-progress-bottom">
+        			<span></span>
+        		</div>
+        	</div>
+        </div>
+         <!--上一曲--> 
+        <div class="music-step">
+        	<div class="music-prev" title="上一曲"></div>
+            <div class="music-pause" title="暂停/播放"></div>
+            <div class="music-next" title="下一曲"></div>
+        </div>
+         <!--音量歌词--> 
+        <div class="music-voice-lyrics-list">
+        	<div class="music-voice" title="音量">
+            	<div class="music-voice-block">
+            		<div class="music-voice-bar"></div>
+                	<div class="music-voice-bar-bg"><span></span></div>
+                </div>
+            </div>
+            <div class="music-lyrics" title="歌词"></div>
+            <a href="" download=""><div class="music-download" title="下载"></div></a>
+        </div>
+		<!--播放列表-->
+        <div id="music-collect-list">
+                	<div class="music-collect-list-title">
+                    	<div class="now-list"><a>当前播放列表()</a></div>
+                        <div class="collect-all"><a>收藏全部</a></div>
+                        <div class="clear-all"><a>清空</a></div>
+                    </div>
+                    <div id="collect-list">
+                    	<div class="collect-list-bar jerry-bar"></div>
+                    	<ul class="collect-list-panel jerry-panel">
+                        <!---
+                        	<li class="li-select">
+                            	<div class="panel-musicname">11111111111</div>
+                                <div class="panel-musicsinger">哈哈哈</div>
+                                <div class="panel-operate">×</div>
+                            </li>
+                         -->   
+                          
+                        </ul>
+                    </div>
+                    
+                </div>
+         <!--收藏分享--> 
+        <div class="music-share-collect">
+        	<div class="music-collect" title="歌曲列表"></div>
+            <div class="music-share" title="分享">
+            	<div class="share-to">
+                	<div class="s0"></div>
+                    <div class="s1"></div>
+                    <div class="s2"></div>
+                    <div class="s3"></div>
+                </div>
+            </div>
+        </div>
+    	<div class="music-bar-back" title="显示/隐藏"></div>
+    </div>
+<!----------------------------------------音乐控件结束--------------------->
+	<audio id="audio" src="1.mp3"></audio>
+<!----------------------------------------歌词界面-------------------------->
+    <div id="lyrics-bg" class="lyrics-none">
+    	<div class="lyrics-content">
+        	<div class="jerry1-panel jerry-panel"></div>
+            <div class="jerry1-bar jerry-bar"></div>
+        </div>   
+    </div>
+    
+	<!----------------------------修改头像---------------------->
+<style>
+#m-head{width:400px;height:400px;background:#fff;position:absolute;top:130px;left:430px;z-index:50;border-radius:5px;z-index:5000;display:none;}
+#m-head .login-title,#m-head .h-file{width:400px;height:30px;background:#000;color:#fff;line-height:30px;text-align:center;}
+#m-head .login-title a{width:30px;height:30px;cursor:pointer;float:right;}
+#m-head .h-file{display:block;width:100px;margin:10px 0 0 75px;background:url(./images/up-btn.png);overflow:hidden;color:#000;float:left;}
+#m-head .h-file .h-f{opacity:0;filter:alpha(opacity=0);}
+#m-head .h-b{width:250px;height:300px;margin:10px auto;background:url(./images/s-one.png);line-height:300px;text-align:center;color:#888;overflow:hidden;position:relative;border:1px solid #333;}
+#m-head .h-sub{width:100px;height:30px;margin:10px 0 0 50px;background:#0CF;color:#fff;text-align:center;line-height:30px;cursor:pointer;border-radius:5px;float:left;}
+#m-head .h-sub:hover{background:#06F;}
+#m-head .h-b .h-img{position:absolute;top:0px;left:0;display:block;}
+</style>
+    <div id="m-head">
+    	<div class="login-title" style="cursor:move;">更换头像<a>×</a></div>
+        <div class="h-b">
+        <img src="" width="250" class="h-img"/>
+        <div></div>
+        <div></div>
+        
+        </div>
+        <a class="h-file"><input type="file" class="h-f" name="file"/></a>
+        <div class="h-sub">确定</div>
+    </div>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/jquery.myscroll.js"></script>
+<script src="./js/publicfn.js"></script>
+<script src="./js/body.js"></script>
+
+<script>
+
+</script>
+</html>
