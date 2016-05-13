@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src='jquery-2.1.1.js'></script>
+<style>
+.loading{display:none;}
+</style>
+</head>
+
+<body>
+    <input type="button" value="load" id="load" />
+
+    <div id="div1"></div>
+<script>
+$(function(){
+	var jsonStr='aaa';
+$('input[type=button]').click(function(){
+	$.ajax({
+		type:'GET',
+		url:'http://192.168.235.117/a.php',//'http://192.168.235.5/jianai/js/jq/a.php',
+		data:{address:'sssssssssssss'},
+		dataType:'JSONP',
+		success: function(res,status,xhr){
+			console.log(res);
+		}
+	})
+});
+	
+	
+});
+</script>
+</body>
+</html>

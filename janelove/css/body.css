@@ -1,0 +1,217 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*reset css*/
+html,body,div,p,span,img,a,h1,h2,h3,dl,dd,dt,ol,ul,li,font,strong,input,table,tr,td{margin:0;padding:0;font=size:12px; font-family:"微软雅黑";border:none;}
+a,ol,ul,li{text-decoration:none; list-style:none;}
+/*reset css*/
+
+/*public css*/
+.width-full{width:100%;}
+a:hover{text-decoration:underline;}
+/*public css*/
+html {
+_overflow-x:hidden; 
+*overflow-y:hidden;} /*用来隐藏html的滚动条*/
+
+/*private css*/
+body{_overflow:hidden;*overflow:hidden;overflow:hidden;position:relative;background:url(../images/bg/body.jpg) no-repeat; background-size:cover;display:block;min-width:700px;min-height:500px;}
+.body-bg-big{display:none;}
+.body-bg{width:100%;height:100%;background:url(../images/bg/bg11.jpg) no-repeat; background-size:cover; position:fixed;top:0px;left:0; z-index:-1;}
+.skindown{background:url(../images/skin2/down.png) repeat-x;opacity:1;}
+.skinside{background:url(../images/skin2/side.png) repeat-y;opacity:1;}
+/*头部*********************************************/
+#header{width:100%;height:100px; position:fixed;top:0; z-index:10;}
+/*logo*********************************************/
+#logo{width:200px;height:100px;background:url(../images/logo.png) center no-repeat; position:absolute;top:0;right:0px;}
+/*搜索框*********************************************/
+#search{width:600px;height:100px;position:absolute;top:0;left:370px;}
+#search .search-text{width:500px;height:30px;display:block;background: rgba(200,200,200,0.5);color:#111;font-size:14px; line-height:30px; text-indent:5px; border-radius:3px;position:absolute;top:30px;left:0;}
+#search .search-text:focus{background:#eee;}
+/*搜索结果*/
+#search-show{width:500px;height:370px;background:#fff;position:absolute;left:0;top:70px;display:none;border-radius:5px;overflow:hidden;}
+#search-show .search-title{width:500px;height:30px;line-height:30px;color:#fff;background:#000;text-align:center;}
+#search-show .search-title a{float:right; margin-right:10px;cursor:pointer;}
+#search-show .search-result{width:500px;overflow:hidden;}
+#search-show .search-result .search-panel{width:500px;background:url(../images/bg-toggle.jpg);}
+#search-show .search-result .search-panel li{width:500px;height:30px;}
+#search-show .search-result .search-panel li div:hover{text-decoration:underline;}
+#search-show .search-result .search-panel li div{float:left;height:30px;text-indent:10px;line-height:30px;cursor:pointer;overflow:hidden;}
+#search-show .search-result .search-panel li .search-name{width:300px;}
+#search-show .search-result .search-panel li .search-singer{width:100px;}
+#search-show .search-result .search-panel li .search-album{width:100px;}
+.s-page{width:100%;height:40px;background:#fff;}
+.s-page input{background:#000;height:30px;width:100px;cursor:pointer;float:left;margin-left:30px;border-radius:3px;color:#fff;}
+.s-page select{width:100px;height:30px;float:left;cursor:pointer;margin-left:30px;}
+.s-page input:hover{background:#ccc;color:#000;}
+/*搜索按钮*/
+#search .search-button{width:30px;height:30px; background:#333 url(http://lappbox.xinli001.com/images/fm/search.png) no-repeat 50% 50%;border-radius:5px;cursor:pointer ; position:absolute;top:30px;left:505px;}
+/*登录和注册框**************************************************/
+#login,#register{overflow:hidden;width:530px;height:300px;background:#fff;border-radius:5px;box-shadow:2px 2px 5px #000;position:absolute;top:150px;left:300px;z-index:1000;display:none;}
+#login .login-title,#register .login-title{width:530px;height:40px;cursor:move;position:absolute;top:0;left:0;line-height:40px;text-align:center;color:#fff;z-index:1000;}
+#login .login-title span,#register .login-title span{width:40px;height:40px;display:block;position:absolute;top:0;right:0;color:#fff;line-height:40px;text-align:center;border-radius:5px;z-index:1001;cursor:pointer;}
+/*登录框下部分*/
+#login .login-left,#login .login-right,#register .login-left{width:285px;height:250px;position:absolute;top:55px;color:#888;font-size:16px;}
+#login .login-left,#register .login-left{left:5px;}
+#login .login-right{wdith:200px;left:300px; text-indent:45px;line-height:40px;}
+/*左边输入登陆*/
+#login .login-left table,#login .login-right table,#register .login-left table{display:block;width:290px;position:absolute;top:10px;left:0;z-index:1002;}
+#login .login-left input{margin:10px 5px;;display:block;width:240px;height:40px;border:1px solid #3CF;box-shadow:1px 1px 5px #39F; text-indent:5px;line-height:40px;}
+#login .login-left .login-button,#register .login-left .register-button{margin:10px auto;color:#fff;background:rgb(64,149,214);cursor:pointer;}
+#login .login-left .login-button:hover,#register .login-left .register-button:hover{color:#333;}
+#login .login-left a{margin:0 20px 0 0;cursor:pointer;}
+/*其他账号登录*/
+#login .login-right a{display:block;width:220px;height:40px;text-align:left; cursor:pointer; text-decoration:none;}
+#login .login-right .qq{background:url(http://lapp.xinli001.com/images/login/login.jpg) no-repeat; background-position:0px 0px;}
+#login .login-right .wb{background:url(http://lapp.xinli001.com/images/login/login.jpg) no-repeat; background-position:0px -40px;}
+#login .login-right .wx{background:url(http://lapp.xinli001.com/images/login/login.jpg) no-repeat; background-position:0px -80px;}
+/*注册*/
+#register .login-left input{margin:0px 5px;display:block;width:300px;height:30px;border:1px solid #3CF;text-indent:5px;line-height:30px;}
+#register .login-left table p{display:block;width:70px;text-align:right;}
+#register .login-left table .error{width:200px;color:#F00;}
+
+/*中间主面板*********************************************/
+/*中间******************************/
+#middle{width:700px;height:300px;position:absolute;top:90px;left:170px;z-index:9;}
+#middle div{width:600px;position:absolute;transition:all 1s;cursor:pointer;overflow:hidden;box-shadow:0 10px 45px #000;}
+#middle div img{display:block;width:600px;height:300px;position:absolute;top:0;left:0;}
+#middle .pic0{height:200px;top:50px;left:10px;z-index:10;}
+#middle .pic1{height:250px;top:25px;left:80px;z-index:11;}
+#middle .pic2{height:300px;top:0px;left:175px;z-index:12;}
+#middle .pic3{height:250px;top:25px;left:270px;z-index:11;}
+#middle .pic4{height:200px;top:50px;left:330px;z-index:10;}
+#middle div .d-b,#middle-bottom .m-ul li .d-b{width:100%;height:0;background:rgba(200,200,200,0.4);text-align:center;color:#fff;line-height:30px;position:absolute;bottom:0;left:0;transition:height 0.5s;overflow:hidden;}
+#middle div:hover .d-b,#middle-bottom .m-ul li:hover .d-b{height:30px;}
+/*中下*/
+#middle-bottom{width:18px;height:100px;position:absolute;right:5px;bottom:100px;transition:width 1s;overflow:hidden;}
+#middle-bottom:hover{overflow:visible;width:900px;}
+#middle-bottom .arrow{width:18px;height:100px;float:left;line-height:110px;font-size:70px;overflow:hidden;text-indent:-20px;background:rgba(200,200,200,0.7);}
+#middle-bottom:hover .arrow{text-indent:-2px;cursor:pointer;}
+#middle-bottom .m-new{width:100px;height:100px;background:url(../images/m-new.png) no-repeat;float:left;margin-left:5px;opacity:0;transition:all 1s;}
+#middle-bottom:hover .m-new{opacity:1;}
+#middle-bottom .m-ul{width:800px;height:100px;fload:left; margin-left:115px;}
+#middle-bottom .m-ul li{width:100px;height:100px;float:left;margin-left:10px;transition:all 1s;cursor:pointer;position:relative;}
+
+#middle-bottom .m-ul li:hover{ -webkit-transform:scale(1.2,1.2);transform:scale(1.2,1.2);-o-transform:scale(1.2,1.2);-ms-transform:scale(1.2,1.2);-moz-transform:scale(1.2,1.2);}
+/*中间结束******************************/
+/*侧栏***********************************/
+#side-bar{ width:100px; height:100%; box-shadow:3px -60px 5px #333; position:absolute;top:0px; left:0px;z-index:51;}
+/*音乐类型*/
+#side-bar .music-style{width:100px;height:100%; position:absolute;left:0;top:140px;}
+#side-bar .music-style .style-ul li,#side-bar .music-app-download,#side-bar .music-login{width:100px;height:40px;font-size:14px;text-align:center;line-height:40px; color:#fff;}
+#side-bar .music-style .style-ul li:hover,#side-bar .music-login:hover,#side-bar .music-app-download:hover{cursor:pointer;color:#fff;}
+#side-bar .music-style .style-ul li:hover{color:#000;background:url(../images/skin2/select.png) repeat-y;}
+#music-show{width:500px;height:500px;background:#fff;position:absolute;top:-50px;left:120px;overflow:hidden;box-shadow:2px 2px 5px #333;border-radius:5px;z-index:51;display:none;}
+#music-show .music-show-title,#user-panel .user-title{width:500px;height:30px;background:#333;color:#fff;line-height:30px;position:absolute;top:0;left:0;text-align:center;z-index:51;}
+#user-panel .user-close{width:40px;height:30px;color:#fff;line-height:30px;position:absolute;top:0;right:0;text-align:center;z-index:52;cursor:pointer;}
+#music-show .music-show-close{float:right; margin-right:5px; cursor:pointer;}
+#music-show .music-list{width:500px;height:460px;position:absolute;top:37px;left:0;overflow:hidden;}
+#music-show .music-list ul li{width:480px;height:80px;margin:10px 10px;background:rgb(245,245,245);}
+#music-show .music-list ul li img{float:left;margin:5px 0;cursor:pointer;}
+#music-show .music-list ul li div{font-size:14px;float:left;color:#333;margin-left:10px;overflow:hidden;}
+#music-show .music-list ul li .m-singer,#music-show .music-list ul li .m-song{width:390px;height:25px;}
+/*登录头像*/
+#side-bar .music-login{height:140px;position:absolute;top:0px;z-index:500;}
+#side-bar .music-login span{display:block;width:100px;height:40px;line-height:40px;text-align:center;color:#fff;}
+#side-bar .music-login .im-d{width:100px;height:100px;position:relative;}
+#side-bar .music-login .im-d .im-m{width:100px;height:100px;background:url(../images/head-m.png);position:absolute;top:0;left:0;z-index:53;}
+#side-bar .music-login .im-d img{width:100px;height:100px;display:block;position:absolute;top:0;left:0;z-index:52;}
+.side-bar-select{color:#000 !important;background:url(../images/skin2/select.png) repeat-y;}
+/*用户管理面板*/
+#user-panel{width:500px;height:500px;background:#fff;position:absolute;left:110px;top:30px;border-radius:5px;overflow:hidden;z-index:1000;display:none;}
+#user-panel .user-logout{width:40px;height:30px;position:absolute;top:0;left:0;color:#fff;z-index:1000;line-height:30px;}
+#user-panel .user-logout:hover{text-decoration:underline;}
+#user-panel .user-info{width:500px;height:200px;margin-top:35px;position:relative;}
+#user-panel .user-info .user-head{width:150px;height:150px;position:absolute;top:25px;left:10px;}
+#user-panel .user-info .user-head img{width:150px;height:150px;border-radius:0;}
+#user-panel .user-info .user-detail,#user-panel .user-info .user-change{width:320px;height:180px;position:absolute;top:5px;right:10px;display:block;*margin-top:25px;}
+/*更改信息*/
+#user-panel .user-info .user-change{display:none;color:#111;}
+#user-panel .user-info .user-change div{width:320px;height:35px;text-align:left;}
+#user-panel .user-info .user-change input{border:1px solid #333;margin-left:5px;width:250px;height:30px;line-height:30px;}
+#user-panel .user-info .user-change .u-sub{float:right;margin-top:5px;margin-right:8px;}
+#user-panel .user-info .user-detail div{width:320px;height:30px;text-align:left;color:#000;overflow:hidden;font-family:Arial, Helvetica, sans-serif;}
+#user-panel .user-info .user-detail .detail-name{height:50px;font-size:24px;border-bottom:2px solid #C00;line-height:65px;font-family:"微软雅黑";}
+#user-panel .user-info .user-detail .detail-name a{float:right;font-size:14px;}
+/*收藏列表*/
+#user-panel .user-collect{width:500px;height:300px;margin-top:-20px;position:relative;}
+#user-panel .user-collect .user-collect-list{width:490px;height:270px;position:absolute;top:5px;left:5px;color:#000;}
+#user-panel .user-collect .user-collect-list .collect-title{height:30px;font-size:24px;border-bottom:2px solid #C00;line-height:30px;text-align:left;}
+#user-panel .user-collect .user-collect-list .collect-userlist{width:490px;height:240px;position:relative;overflow:hidden;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-panel{width:480px;height:auto;background:url(../images/bg-toggle.jpg);position:absolute;left:0;top:0;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-panel li{width:480px;height:30px;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-panel li div{float:left;text-align:left;line-height:30px;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-panel li .des-singer{width:80px;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-panel li .des-song{width:350px;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-panel li .des-album{width:50px;}
+#user-panel .user-collect .user-collect-list .collect-userlist .list-bar{width:10px;background:#333;position:absolute;right:0;top:0;border-radius:5px;height:50px;}
+/*app下载*/
+#side-bar .music-app-download{width:100px;height:100px;position:absolute;bottom:0px;border-bottom:none;}
+#side-bar .music-app-download img{display:block;margin:10px auto;}
+
+/*底部控件*********************************************/
+#music-bar{ width:100%;height:60px;box-shadow:60px -3px 5px #333;position:fixed; bottom:0; z-index:50;}
+/*进度条*/
+#music-bar .music-progress{width:550px;height:60px;position:absolute;top:0;left:120px;}
+#music-bar .music-songname{width:500px;height:20px;position:absolute;top:3px;left:50px;color:#eee;line-height:20px; font-size:14px;overflow:hidden;}
+#music-bar .music-time{width:50px;height:20px;position:absolute;bottom:15px;right:-10px;color:#eee;line-height:20px; font-size:14px;}
+#music-bar .music-progress img{ width:34px;height:34px;display:block;position:absolute;top:10px;cursor:pointer;}
+#music-bar .music-progress .music-progress-content,#music-bar .music-progress .music-progress-bottom,#music-bar .music-progress .music-progress-top{width:455px;height:10px;position:absolute; left:50px;bottom:20px;cursor:pointer;}
+#music-bar .music-progress .music-progress-bottom{ left:0;top:0;background:rgb(83,83,83);border-radius:5px;z-index:50;}
+#music-bar .music-progress .music-progress-bottom span{width:14px;height:14px;position:absolute; left:0;top:-2px;display:block;background:url(../images/progressbtn.png);z-index:52;}
+#music-bar .music-progress .music-progress-top{width:0; left:0;top:0;background:rgb(199,12,12);border-radius:5px 0 0 5px;z-index:51;}
+/*暂停播放*/
+#music-bar .music-step{width:120px;height:60px;position:absolute;top:0;left:720px;}
+#music-bar .music-step .music-prev,#music-bar .music-step .music-pause,#music-bar .music-step .music-next,#music-bar .music-voice-lyrics-list .music-voice,#music-bar .music-voice-lyrics-list .music-lyrics,#music-bar .music-voice-lyrics-list .music-download,#music-bar .music-share-collect .music-collect,#music-bar .music-share-collect .music-share{width:55px;height:55px;position:absolute;top:5px;cursor:pointer;}
+#music-bar .music-step .music-prev{left:0;background:url(../images/prev.png) no-repeat;}
+#music-bar .music-step .music-pause{left:50px;top:0px;background:url(../images/pause.png) no-repeat;}
+#music-bar .music-step .music-play{left:50px;top:0px;background:url(../images/play.png) no-repeat;}
+#music-bar .music-step .music-next{left:110px;background:url(../images/next.png) no-repeat;}
+/*音量歌词歌曲列表*/
+#music-bar .music-voice-lyrics-list{width:90px;height:60px;position:absolute;top:0;left:880px;}
+#music-bar .music-voice-lyrics-list .music-voice{left:0;top:15px;background:url(../images/volumn.png) no-repeat;}
+#music-bar .music-voice-lyrics-list .music-voice .music-voice-block{display:none;}
+#music-bar .music-voice-lyrics-list .music-voice .music-voice-bar-bg{width:10px;height:0px;background:#333 no-repeat;position:absolute;top:-100px;left:5px;border-radius:5px;z-index:52;}
+#music-bar .music-voice-lyrics-list .music-voice .music-voice-bar{width:10px;height:100px;background:rgb(199,12,12) no-repeat;position:absolute;top:-100px;left:5px;border-radius:5px;z-index:50;}
+#music-bar .music-voice-lyrics-list .music-voice .music-voice-bar-bg span{width:14px;height:14px;position:absolute; left:-2px;top:-5px;border-radius:5px;display:block;background:url(../images/progressbtn.png);z-index:53;}
+#music-bar .music-voice-lyrics-list .music-lyrics{left:50px;top:15px;background:url(../images/lyrics.png) no-repeat;}
+#music-bar .music-voice-lyrics-list .music-download{left:100px;top:15px;background:url(../images/download.png) no-repeat;}
+/*收藏分享*/
+#music-bar .music-share-collect{width:60px;height:60px;position:absolute;top:0;left:1040px;}
+#music-bar .music-share-collect .music-collect{left:0;top:15px;background:url(../images/collect.png) no-repeat;}
+#music-bar .music-share-collect .music-collect:hover{background:url(../images/collectred.png) no-repeat;}
+#music-bar .music-share-collect .music-share{left:50px;top:15px;background:url(../images/share.png) no-repeat;position:relative;}
+#music-bar .music-share-collect .music-share .share-to{width:0px;height:30px;position:absolute;top:-49px;left:-114px;overflow:hidden;transition:all 0.3S;background:rgba(200,200,200,0.3);}
+#music-bar .music-share-collect .music-share .share-to div{width:30px;height:30px;margin:3px 0 0 5px;cursor:pointer;float:left;}
+#music-bar .music-share-collect .music-share .share-to .s0{background:url(../images/qqkongjian.png) no-repeat;}
+#music-bar .music-share-collect .music-share .share-to .s1{background:url(../images/weixin.png) no-repeat;}
+#music-bar .music-share-collect .music-share .share-to .s2{background:url(../images/weibo.png) no-repeat;}
+#music-bar .music-share-collect .music-share .share-to .s3{background:url(../images/douban.png) no-repeat;}
+/*隐藏固定*/
+#music-bar .music-bar-back{width:100px;height:20px; background:url(../images/lock.png) no-repeat;cursor:pointer; position:absolute; right:20px;top:-15px; display:block;}
+/*显示收藏列表*/
+#music-collect-list{width:500px;height:300px;background:#555;position:absolute;right:100px;bottom:60px;color:#fff;overflow:hidden;z-index:50;cursor:pointer;display:none;border-radius:5px;overflow:hidden;box-shadow:-2px -2px 5px #fff}
+/*收藏列表title*/
+#music-collect-list .music-collect-list-title{width:500px;height:40px;background:#000;position:absolute;top:0;left:0;line-height:40px;z-index:55;}
+#music-collect-list .music-collect-list-title .now-list{width:160px;position:absolute;left:0;top:0;}
+#music-collect-list .music-collect-list-title .collect-all{width:100px;position:absolute;left:350px;top:0;}
+#music-collect-list .music-collect-list-title .clear-all{width:50px;position:absolute;left:450px;top:0;}
+/*滚动面板*/
+#collect-list{width:500px;height:260px;background:#222;position:absolute;top:40px;left:0;z-index:10000;}
+/*播放列表滚动条*/
+#collect-list .collect-list-bar{width:6px;background:#fff;position:absolute;top:0;right:2px;border-radius:3px;}
+#collect-list .collect-list-panel{width:490px;height:auto;background:#222;position:absolute;top:0;left:0;}
+#collect-list .collect-list-panel li{width:490px;height:30px; line-height:30px;text-align:left;color:#aaa;font-size:13px;}
+#collect-list .collect-list-panel li .panel-musicname{text-indent:10px;width:300px;height:30px;float:left;overflow:hidden;}
+#collect-list .collect-list-panel li .panel-collect{text-indent:10px;width:50px;height:30px;float:left;overflow:hidden;}
+#collect-list .collect-list-panel li .panel-musicsinger{text-indent:10px;width:100px;height:30px;float:left;}
+#collect-list .collect-list-panel li .panel-operate{width:40px;height:30px;float:left;text-align:center;}
+#collect-list .collect-list-panel li:hover{color:#fff; background:#000;}
+.li-select{color:#fff !important; background:#000;}
+/*歌词蒙板*/
+#lyrics-bg{background:url(../images/lyricsbg.png);background-size:cover;position:absolute;left:100px;top:0;overflow:hidden;z-index:10;}
+.lyrics-none{display:none;}
+#lyrics-bg .lyrics-content{height:500px;width:700px;position:absolute;left:150px;top:100px;overflow:hidden;}
+#lyrics-bg .lyrics-content .jerry1-panel{width:700px;position:absolute;left:0;top:0;z-index:29;}
+#lyrics-bg .lyrics-content .jerry1-bar{width:10px;background:rgba(200,200,200,0.7);position:absolute;top:0;right:10px;z-index:30;cursor:pointer;}
+.lyrics-p{height:25px;width:100%;line-height:25px;text-align:center;}
