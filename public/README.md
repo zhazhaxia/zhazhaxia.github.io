@@ -8,6 +8,6 @@
 核心是AudioContext		
 
 最简单的节点图
-    sourceNode --> destinationNode
+`sourceNode --> destinationNode`
 
 其他具体节点需要参考web audio api 官方网站
