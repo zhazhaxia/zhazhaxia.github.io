@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+#main{ width:400px; height:400px; background-color: #fff; border:2px solid #000; margin:0 auto; position:relative; overflow:hidden;}
+#container{ width:100%; height:400px; position:relative; top:-100px;}
+.row{ width:100%; height:100px;}
+.cell{ width:100px; height:100px; float:left;}
+.black{ background-color:#000;}
+#score{ text-align:center;}
+</style>
+<script>
+	window.onload=function(){
+		init();
+		start();
+	}
+	var timer=null;//定时器
+	var state=0;//0初始化 1开始 2暂停 3失败
+	var speed=2;//速度
+	//创建一行
+	function createRow(){
+		var con=$('container');
+			var row=createDiv('row');
+			var classes=createArray();
+			for(var i=0;i<4;i++){
+					row.appendChild(createDiv(classes[i]));
+				}
+			if(con.firstChild==null){con.appendChild(row);}
+			else {con.insertBefore(row,con.firstChild);}
+		}
+	//创建一个类名是className的DIV
+	function createDiv(className){
+		var div=document.createElement('div');
+		div.className=className;
+		return div;
+		}
+		
+	//创建随机的黑块
+	function createArray(){
+		var arr=['cell','cell','cell','cell'];
+		var i=Math.floor(Math.random()*4);
+		arr[i]='cell black';
+		return arr;
+		}
+	//初始化
+	function init(){
+			for(var i=0;i<4;i++){
+				createRow();
+			}
+			$('main').onclick=function(ev){
+				judge(ev);
+			}
+		}
+	//判断有没有点到白块
+	function judge(ev){
+		if(state==3){return;}
+		if(ev.target.className.indexOf('black')==-1){
+			fail();
+		}
+		else{
+			ev.target.className='cell';	
+			score();
+		}
+	}
+	//结束处理
+	function fail(){
+		clearInterval(timer);
+			alert('你犯规了\n游戏结束！');
+			state=3;
+	}
+		//删除最后一行
+	function deleteRow(){
+		var con=$('container');
+		//alert(con.lastChild);
+		con.removeChild(con.lastChild);//空文本也是子节点
+		}	
+	//动起来
+	function move(){
+		var con=$('container');
+		var top=parseInt(getStyle(con,'top'));
+		top+=speed;
+		con.style.top=top+'px';
+		if(top>=0){
+			 createRow();
+			 con.style.top=-100+'px';
+			 var cells=con.lastChild.childNodes;
+			 if(cells.length==0){}
+			 else{
+				  for(var i=0;i<cells.length;i++){
+				 if(cells[i].className.indexOf('black')!==-1){
+					fail();
+				}
+			}
+			}
+			 deleteRow(); 
+			}
+		
+		}
+	//定时器
+	function start(){
+			timer=window.setInterval('move()',30);
+		}
+	//计分
+	function score(){
+		var newScore=parseInt($('score').innerHTML)+1
+		if(newScore%10==2)speedUp()
+		$('score').innerHTML=newScore
+	}
+	//加速处理
+	function speedUp(){
+		if(speed<=12)speed+=2;
+		else{}
+	}
+	
+	
+	
+	
+	
+		
+	//封装getStyle （获取样式currentStyle getComputedStyle兼容处理）
+	function getStyle(obj, attr){
+	 if(obj.currentStyle)
+	 {
+	  return obj.currentStyle[attr];
+	 }
+	 else
+	 {
+	  return getComputedStyle(obj, false)[attr];
+	 }
+	}
+	
+	//获取ID
+	function $(id){
+			return document.getElementById(id);
+			}
+</script>
+<body>
+<h1 id="score">0</h1>
+<div id="main">
+	<div id='container'>
+    </div>
+
+</div>
+</body>
+
+</html>

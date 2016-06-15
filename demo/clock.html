@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#clock{ border:#000 1px solid;}
+</style>
+</head>
+<script>
+window.onload=function(){
+	var clock=document.getElementById('clock');
+	var cxt=clock.getContext('2d');
+	drawClock()
+	function drawClock(){
+		var date=new Date();
+		var hour=date.getHours();
+		var minute=date.getMinutes();
+		var second=date.getSeconds();
+		hour=hour%12+minute/60;
+		//清空画布
+		cxt.clearRect(0,0,500,500);
+		//表盘
+		cxt.lineWidth=10;
+		cxt.strokeStyle='blue'
+		cxt.beginPath();
+		cxt.arc(250,250,200,0,360,false);
+		cxt.closePath();
+		cxt.stroke();
+			//时刻度
+			for(var i=0;i<12;i++){
+				//保存画布环境
+				cxt.save();
+					//设置时针粗细
+					cxt.lineWidth=7;
+					//设置始终颜色
+					cxt.strokeStyle='#000'
+					//先重置（0，0）点
+					cxt.translate(250,250);
+					//设置旋转角度（用弧度制表示）
+					cxt.rotate(i*30*Math.PI/180);
+					cxt.beginPath();
+					cxt.moveTo(0,-170);
+					cxt.lineTo(0,-190);
+					cxt.closePath();
+					cxt.stroke()
+				//还原画布
+				cxt.restore();
+			}
+			//分刻度
+			for(i=0;i<60;i++){
+				cxt.save();
+					cxt.translate(250,250);
+					cxt.rotate(i*6*Math.PI/180);
+					cxt.lineWidth=5;
+					cxt.strokeStyle='#000';
+					cxt.beginPath();
+					cxt.moveTo(0,-180);
+					cxt.lineTo(0,-190);
+					cxt.closePath();
+					cxt.stroke();
+				cxt.restore();
+			}
+		//时针
+		cxt.save()
+			cxt.translate(250,250)
+			cxt.rotate(hour*30*Math.PI/180)
+			cxt.lineWidth=7
+			cxt.strokeStyle='#000'
+			cxt.beginPath()
+			cxt.moveTo(0,10)
+			cxt.lineTo(0,-140)
+			cxt.closePath()
+			cxt.stroke()	
+		cxt.restore()
+		//分针
+		cxt.save()
+			cxt.translate(250,250)
+			cxt.rotate(minute*6*Math.PI/180)
+			cxt.lineWidth=5
+			cxt.strokeStyle='#000'
+			cxt.beginPath()
+			cxt.moveTo(0,10)
+			cxt.lineTo(0,-160)
+			cxt.closePath()
+			cxt.stroke()	
+		cxt.restore()
+		//秒针
+		cxt.save()
+			cxt.translate(250,250)
+			cxt.rotate(second*6*Math.PI/180)
+			cxt.lineWidth=4
+			cxt.strokeStyle='red'
+			cxt.beginPath()
+			cxt.moveTo(0,10)
+			cxt.lineTo(0,-180)
+			cxt.closePath()
+			cxt.stroke()
+			//画交叉点
+			cxt.beginPath()
+			cxt.arc(0,0,5,0,360,false)
+			cxt.closePath()	
+			cxt.fillStyle='red'
+			cxt.fill()
+			cxt.stroke()
+			cxt.beginPath()
+			cxt.arc(0,-160,5,0,360,false)
+			cxt.closePath()	
+			cxt.fillStyle='red'
+			cxt.fill()
+			cxt.stroke()
+		cxt.restore()
+	}
+	setInterval(drawClock,1000);
+}
+</script>
+<body>
+    <canvas id="clock" width="500" height="500">
+    浏览器不支持canvas标签
+    </canvas>
+</body>
+</html>

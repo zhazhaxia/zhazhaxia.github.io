@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+window.onload=function(){
+	var solar=document.getElementById('solar')
+	var cxt=solar.getContext('2d')
+	var time=0;//地球运行天数
+	drawSolar();
+	function drawSolar(){
+		//清楚画布
+		cxt.clearRect(0,0,1000,1000);
+		//画轨道
+		cxt.strokeStyle='#fff';
+		cxt.beginPath();
+		cxt.arc(500,500,100,0,360,false);
+		cxt.closePath();
+		cxt.stroke();
+		
+		//画太阳
+		cxt.beginPath();
+		cxt.arc(500,500,20,0,360,false);
+		cxt.closePath();
+		//太阳渐变颜色（径向渐变参数分别是
+		//内圆心x，内圆心y，内半径，外圆心x，外圆心y，外半径）
+		var sunColor=cxt.createRadialGradient(500,500,0,500,500,20);
+		sunColor.addColorStop(0,'#f00');
+		sunColor.addColorStop(1,'#f96');
+		cxt.fillStyle=sunColor;
+		cxt.fill();
+		
+		//画地球
+		cxt.save();
+			cxt.translate(500,500);
+			//cxt.rotate(90*Math.PI/180);
+			//地球每天转365/360
+			var deg=365/360;
+			cxt.rotate(time*deg*Math.PI/180);
+			cxt.beginPath();
+			cxt.arc(0,-100,10,0,360,false);
+			cxt.closePath();
+			//设置地球颜色
+			var earthColor=cxt.createRadialGradient(0,-100,0,0,-100,10);
+			earthColor.addColorStop(0,'#78b1e8');
+			earthColor.addColorStop(1,'#050c12');
+			cxt.fillStyle=earthColor;
+			cxt.fill();
+		cxt.restore();
+		time+=1;//天数增加
+	}
+	//让地球运动
+	setInterval(drawSolar,30);
+	
+}
+</script>
+<body>
+	<canvas width="1000" height="1000" id="solar" style="background:#000">
+    您的浏览器不支持canvas标签
+    </canvas>
+</body>
+</html>

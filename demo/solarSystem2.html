@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+window.onload=function(){
+	var cxt=document.getElementById('canvas').getContext('2d');	
+	//轨道
+	function drawTrack(){
+		for(var i=0;i<8;i++){
+			cxt.beginPath();
+			cxt.arc(500,500,(i+1)*50,0,360,false);
+			cxt.closePath();
+			cxt.strokeStyle='#fff';
+			cxt.stroke();
+			
+		}
+	}
+	drawTrack();
+	//星球构造函数
+	function Star(x,y,radius,cycle,startColor,endColor){
+		//画出星球需要的参数
+		//星球的坐标点
+		this.x=x;
+		this.y=y;
+		//星球的半径
+		this.radius=radius;
+		//公转周期
+		this.cycle=cycle;
+		//星球颜色，开始色、结束色
+		this.startColor=startColor;
+		this.endColor=endColor;
+		//新建一个渐变色的对象
+		this.color=null;
+		//设置一个计时器
+		this.time=0;
+		this.draw=function(){
+			cxt.save();
+				cxt.translate(500,500);
+				var arc=360/this.cycle;
+				cxt.rotate(this.time*arc*(Math.PI/180));
+				cxt.beginPath();
+				cxt.arc(this.x,this.y,this.radius,0,360,false);
+				cxt.closePath();
+				//设置填充颜色
+				this.color=cxt.createRadialGradient(this.x,this.y,0,this.x,this.y,this.radius);
+				this.color.addColorStop(0,this.startColor);
+				this.color.addColorStop(1,this.endColor);
+				cxt.fillStyle=this.color;
+				cxt.fill();
+			cxt.restore();
+			//执行完毕后时间增加
+			this.time+=1;
+		}
+	}
+	//创建一个太阳对象构造函数
+	function Sun(){
+		Star.call(this,0,0,20,0,'#f00','#f90');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个水星对象构造函数
+	function Mercury(){
+		Star.call(this,0,-50,10,87.70,'#a69697','#5c3e40');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个金星对象构造函数
+	function Venus(){
+		Star.call(this,0,-100,10,224.701,'#c4bbac','#1f1315');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个地球对象构造函数
+	function Earth(){
+		Star.call(this,0,-150,10,365.2422,'#78b1e8','#050c12');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个火星对象构造函数
+	function Mars(){
+		Star.call(this,0,-200,10,686.98,'#cec9b6','#76422d');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个木星对象构造函数
+	function Jupiter(){
+		Star.call(this,0,-250,10,4332.589,'#c0a48e','#322222');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个土星对象构造函数
+	function Saturn(){
+		Star.call(this,0,-300,10,10759.5,'#f7f9e3','#5c4533');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个天王星对象构造函数
+	function Uranus(){
+		Star.call(this,0,-350,10,30799.095,'#a7e1e5','#19243a');//函数调用自己，是对象的一种继承方式	
+	}
+	//创建一个海王星对象构造函数
+	function Neptune(){
+		Star.call(this,0,-400,10,60152,'#0661b2','#1e3b73');//函数调用自己，是对象的一种继承方式	
+	}
+		var mySun=new Sun();
+		var myMercury=new Mercury();
+		var myVenus=new Venus();
+		var myEarth=new Earth();
+		var myMars=new Mars();
+		var myJupiter=new Jupiter();
+		var mySaturn=new Saturn();
+		var myUranus=new Uranus();
+		var myNeptune=new Neptune();
+	
+	function move(){
+		//清楚画布
+		cxt.clearRect(0,0,1000,1000);
+		//划轨道
+		drawTrack();
+		//创建太阳和行星
+		mySun.draw();
+		myMercury.draw();
+		myVenus.draw();
+		myEarth.draw();
+		myMars.draw();
+		myJupiter.draw();
+		mySaturn.draw();
+		myUranus.draw();
+		myNeptune.draw();
+	}
+	//让星球运转
+	setInterval(move,30);
+
+}
+</script>
+<body>
+	<canvas id='canvas' width="1000" height="1000" style=" background:black;"
+</body>
+</html>

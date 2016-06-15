@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>打开摄像头</title>
+</head>
+
+<body>
+<!--
+理想情况下我们应该先判断你的设备上是否有摄像头或相机，但简单起见，我们在这里直接
+写出了HTML标记，而不是用JavaScript先判断然后动态生成这些标记,一定要在server里面打开！
+-->
+<video id="video" width="640" height="480" autoplay></video>
+<canvas id="canvas" width="640" height="480"></canvas>
+</body>
+<script>
+	
+		var aVideo=document.getElementById('video');
+		var aCanvas=document.getElementById('canvas');
+		var ctx=aCanvas.getContext('2d');
+		var speed=30;//每帧时间
+		var w=aCanvas.width;
+		var h=aCanvas.height;
+		//获取摄像头对象
+		navigator.getUserMedia  = navigator.getUserMedia ||
+                          navigator.webkitGetUserMedia ||
+                          navigator.mozGetUserMedia ||
+                          navigator.msGetUserMedia;
+      	navigator.getUserMedia({video:true}, gotStream, noStream);
+		//将摄像头放进video
+		function gotStream(stream) {
+			video.src = URL.createObjectURL(stream);
+			video.onerror = function () {
+			  stream.stop();
+			};
+			stream.onended = noStream;
+			video.onloadedmetadata = function () {
+			  console.log('摄像头成功打开！');
+			};
+		}
+		//不存在显示错误信息
+		function noStream(err) {
+       	 	alert(err);
+      }
+	//alert(aVideo.width+':'+aVideo.height);
+	//alert(aCanvas.width+':'+aCanvas.height);
+	//投影到canvas
+	//进行灰度转换
+	
+	setInterval(function(){
+			ctx.drawImage(aVideo, 0, 0)
+			
+			var imgData=ctx.getImageData(0,0,w,h)
+			
+			convertToGray(imgData.data)
+			ctx.putImageData(imgData,0,0)
+		},speed);
+	
+	function convertToGray(data,row,col){
+		var len=data.length
+		//alert(len)
+		var pixels=len/4
+		//alert(pixels)
+		var dataArr=new Array()
+		for(var i=0;i<pixels;i++){
+			var r=data[i*4]
+			var g=data[i*4+1]
+			var b=data[i*4+2]
+			
+			var gray=parseInt((11*r+16*g+5*b)/32)
+			dataArr.push(gray)
+		}
+
+		for (var i=0;i<pixels;i++){pixels-i-1
+			data[i*4]=dataArr[i]
+			data[i*4+1]=dataArr[i]
+			data[i*4+2]=dataArr[i]
+		}
+			
+	}
+
+
+</script>
+</html>
