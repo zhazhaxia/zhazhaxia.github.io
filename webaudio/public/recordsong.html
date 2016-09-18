@@ -1,0 +1,85 @@
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>简爱音乐网</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Language" content="zh-cn">
+<style>
+body{margin:50px 50px;font-family: "微软雅黑";}
+.record,.stop,.play{width:300px;height: 30px;background: #9f8;float: left;margin: 20px 20px;cursor: pointer;text-align: center;line-height: 30px;}
+.record:hover,.play:hover,.stop:hover{background: #2f4;}
+#player{clear: both;display: block;}
+</style>
+</head>
+<body>
+    <pre id="songname">hello milu!</pre>
+
+<audio id="songplayer" controls="controls" src="./media/niunai.mp3"></audio>
+<br>
+<div class="record">record</div>
+<div class="stop" disabled="true">stop</div>
+<div class="play" disabled="true">play</div><br>
+<audio id="player" controls="controls" src=""></audio>
+</body>
+<script src="./js/lib/jquery.js"></script>
+<script src="./js/lib/jCanvaScript.js"></script>
+<script src="./js/lib/sea.js"></script>
+<script>
+seajs.config({
+    base:"./"
+});
+
+define('main',function( require, exports, module){
+    var recordsong = require('./js/recordsong'),
+        $record = $('.record'),
+        $stop = $('.stop'),
+        $play = $('.play');
+    // console.log(songclip)
+    exports=exports.module={
+        init:function($p){
+            this.$player = $p;
+            this.player = $p[0];
+            this.bind();
+
+            recordsong.init(this.player);
+            recordsong.getSpeaker();
+        },
+        $player:"",
+        player:"",
+        bind:function(){
+            $('body')
+            .on('click', '.record', function(e) {
+                e.preventDefault();
+                $record[0].disabled=true;
+                $stop[0].disabled=false;
+                $play[0].disabled=true;
+
+                $record.text('recording......')
+                recordsong.record();
+            }).on('click', '.stop', function(e) {
+                e.preventDefault();
+                $record[0].disabled=false;
+                $stop[0].disabled=true;
+                $play[0].disabled=false;
+
+                $record.text('record')
+                recordsong.stop();
+            }).on('click', '.play', function(e) {
+                e.preventDefault();
+                $record[0].disabled=false;
+                $stop[0].disabled=true;
+                $play[0].disabled=true;
+
+                exports.player.play();
+            });
+        }
+    }
+});
+
+seajs.use('main',function(ex){
+    ex = ex.module;
+    ex.init($('#player'));
+});
+</script>
+</html>
