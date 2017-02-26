@@ -40,6 +40,7 @@
 <body>
 <section class="container">
     <h1 class="title">八音符游戏 <p style="color:#333;font-size:14px;" class="t-alert">(建议你带着耳麦说几句)</p></h1>
+    <h2 class="ttt"></h2>
     <div class="bqb bqb1"></div>
     <div class="bqb bqb2"></div>
     <div class="bqb bqb3"></div>
@@ -178,9 +179,10 @@ define("main",function (require, exports, module) {
         },
         letsGo:function (vol) {
             console.log(vol)
+            $('.ttt').text(vol)
             if (vol > 1 ) {//走
                 exports.moveBarrier();
-                if (vol > 30) {//跳
+                if (vol > 20) {//跳
                     console.log('jump')
                     exports.jumpNotes();
                 }
