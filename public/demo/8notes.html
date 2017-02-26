@@ -182,7 +182,7 @@ define("main",function (require, exports, module) {
             $('.ttt').text(vol)
             if (vol > 1 ) {//走
                 exports.moveBarrier();
-                if (vol > 20) {//跳
+                if (vol > 10) {//跳
                     console.log('jump')
                     exports.jumpNotes();
                 }
@@ -224,7 +224,7 @@ define("main",function (require, exports, module) {
                     console.log("lost!!!!!!!!")
                     $('.title').text('啊！掉坑了！重新来一遍吧！')
                     setTimeout(function () {
-                        location.reload();
+                        location.href = "https://zhazhaxia.github.io/public/demo/8notes.html?a="+new Date().getTime();
                     }, 2000)
                 }
             }
