@@ -109,17 +109,17 @@ define("main",function (require, exports, module) {
                 }
             });
         },
-        initStat:function () {
+        initStat:function () {//初始化障碍物宽高
             $('.barrier').width(exports.config.barrierWidth);
             exports.config.numberOfBarrier = Math.ceil(exports.config.containerWidth / exports.config.barrierWidth) + 2;
             $('.bottom-barrier').width(exports.config.numberOfBarrier * exports.config.barrierWidth);//障碍物容器宽
             exports.createBarrier(exports.config.numberOfBarrier);
         },
-        getAudio:function () {
+        getAudio:function () {//获取audio源
             var source = exports.audioContext.createMediaElementSource(exports.audio);
             source.connect(exports.audioContext.destination);
         },
-        getSpeaker:function () {
+        getSpeaker:function () {//链接麦克风 并获取音调数据
             
             if(!navigator.getUserMedia){alert('不支持麦克风录音');return;}
             navigator.getUserMedia({audio:true}, function (stream) {
@@ -168,7 +168,7 @@ define("main",function (require, exports, module) {
                 console.log('err',err)
             });
         },
-        getVolume:function (data) {
+        getVolume:function (data) {//振幅
             var total = 4;
             exports.config.volSum++;
             exports.config.vol += data;
@@ -178,7 +178,7 @@ define("main",function (require, exports, module) {
                 exports.config.vol = 0;
             }
         },
-        letsGo:function (vol) {
+        letsGo:function (vol) {//达到条件跳跃
             console.log(vol)
             //$('.ttt').text(vol)
             if (vol > 1 ) {//走
@@ -191,7 +191,7 @@ define("main",function (require, exports, module) {
                 exports.stopBarrier();
             }
         },
-        jumpNotes:function () {
+        jumpNotes:function () {//音符跳动
             if(exports.config.gameEnd)return;
             var bottom = parseInt($notes.css("bottom")),
                 height = 100;
@@ -202,7 +202,7 @@ define("main",function (require, exports, module) {
                 })
             })
         },
-        judgeLost:function(){
+        judgeLost:function(){//是否失败
             var $barrier = $bottomBarrier.children().eq(2);
             var step = 4;
             if ($barrier.hasClass('barrier-high')) {
@@ -226,13 +226,14 @@ define("main",function (require, exports, module) {
                     console.log("lost!!!!!!!!")
                     $('.title').text('啊！掉坑了！重新来一遍吧！')
                     exports.config.gameEnd = true;
+                    $notes.stop(true).animate({bottom:0},500)
                     setTimeout(function () {
                         location.href = "https://zhazhaxia.github.io/public/demo/8notes.html?a="+new Date().getTime();
                     }, 2000)
                 }
             }
         },
-        moveBarrier:function () {
+        moveBarrier:function () {//障碍物移动
             if(exports.config.gameEnd)return;
             var $b = $('.bottom-barrier'),
                 step = 4;
@@ -249,7 +250,7 @@ define("main",function (require, exports, module) {
 
             }, 30);
         },
-        stopBarrier:function () {
+        stopBarrier:function () {//停止障碍物移动
             exports.config.lockMove = false;
             clearInterval(exports.config.timer);
         },
@@ -280,7 +281,7 @@ define("main",function (require, exports, module) {
             }
             return html;
         },
-        getAverage:function (arr) {
+        getAverage:function (arr) {//音量均值
             var sum = 0;
             for(var i = 0,len = arr.length; i < len; i++){
                 sum += arr[i];
