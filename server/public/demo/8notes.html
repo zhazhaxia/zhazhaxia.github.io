@@ -46,7 +46,7 @@
 <body>
 <section class="container">
     <h1 class="title">不要停！八分音符酱<p style="color:#333;font-size:14px;" class="t-alert">(建议你带着耳麦说几句，等待doge跳起来，仅支持android5.0+)</p></h1>
-    <h2 class="ttt">跳不起来？在这里设置临界值(1-40)<input type="number" class="threshold" value="40" style="width:40px;text-align:center;"></h2>
+    <h2 class="ttt">跳不起来？在这里设置临界值(1-40)<input type="number" class="threshold" value="10" style="width:40px;text-align:center;"></h2>
     <div class="bqb bqb1"></div>
     <div class="bqb bqb2"></div>
     <div class="bqb bqb3"></div>
@@ -61,18 +61,15 @@
 
 <script src="//kg.qq.com/gtimg/music/js/lib/jquery-min.js?max_age=31104000000"></script>  
 <script type="text/javascript" src="//kg.qq.com/js/lib/sea-kg.js?max_age=31104000000"></script>
-<script>
-</script>
 <script type="text/javascript">
+
 define("main",function (require, exports, module) {
     var $notes = $('.notes'),//音符
         $bottomBarrier = $('.bottom-barrier');
-
     navigator.getUserMedia = (navigator.getUserMedia ||
                        navigator.webkitGetUserMedia ||
                        navigator.mozGetUserMedia ||
                        navigator.msGetUserMedia);
-
     exports = module.exports = {
         init:function () {
             exports.bind();
@@ -190,7 +187,7 @@ define("main",function (require, exports, module) {
             }
         },
         letsGo:function (vol) {//达到条件行走或者跳跃
-            console.log(vol)
+            // console.log(vol)
             //$('.ttt').text(vol)
             if (vol > exports.config.walkValue ) {//走
                 exports.moveBarrier();
@@ -309,9 +306,9 @@ define("main",function (require, exports, module) {
         }
     }
 });
-seajs.use("main",function (ex) {
+seajs.use(["main"],function (ex) {
     ex.init();
-})
+});
 </script>
 </body>
 </html>
