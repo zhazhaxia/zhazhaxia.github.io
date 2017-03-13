@@ -12,7 +12,7 @@
 
 ## 开始
 
-先看下游戏的截图吧，体验地址 [https://zhazhaxia.github.io/server/public/demo/8notes.html](https://zhazhaxia.github.io/server/public/demo/8notes.html "八分音符酱")
+先看下游戏的截图吧，体验地址 [https://zhazhaxia.github.io/server/public/demo/8notes/index.html](https://zhazhaxia.github.io/server/public/demo/8notes/index.html "八分音符酱")
 
 ![H5八分音符酱](http://i.imgur.com/aNzryFk.png)
 
@@ -199,6 +199,12 @@
 
 以上就是本文游戏的主要设计的相关思路。
 
-## 结束语
+## 最后
 
 本文从PC游戏《不要停？八分音符酱》的灵感出发，描述了其H5简易版本的开发思路，游戏的设计许多不足，请读者们批评指正。笔者开发H5版本《八分音符酱》的意图不只是简单的为了把pc的游戏用H5来实现，而且想通过这么一个在玩法上有些创新的游戏，来完成一个webAduio的demo。目前web正在蓬勃发展，W3C也出了许多新的web标准，如webAudioApi，webAssembly，webAR，webGL等，这些都在发展阶段，在实际的应用中还没有广泛应用。所以希望通过这么一个demo，能够有更多想法，利用webAudio做出更多好玩有趣的应用。
+
+- 游戏地址[https://zhazhaxia.github.io/server/public/demo/8notes/index.html](https://zhazhaxia.github.io/server/public/demo/8notes/index.html "游戏地址")
+
+- 代码[https://github.com/zhazhaxia/zhazhaxia.github.io/tree/master/server/public/demo/8notes](https://github.com/zhazhaxia/zhazhaxia.github.io/tree/master/server/public/demo/8notes "H5八分音符酱源码")
+
+- 参考[https://www.w3.org/TR/webaudio/](https://www.w3.org/TR/webaudio/ "webAudioApi")
