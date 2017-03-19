@@ -66,109 +66,109 @@
   游戏中涉及到一些参数的配置用来控制游戏的状态，具体的配置可以在编写的时候生成，这里有本文部分的配置信息。
 
 
-    config:{
-        barrierWidth:80,//障碍物宽
-        containerWidth:$('.container').width(),//大容器宽
-        numberOfBarrier:0,//容器障碍物数目
-        rank : 2,//难度1,2,3
-        timer:null,
-        lockMove:false,//锁定移动
-        lockLost:false,//坑来了，开始判断
-        dangerArea:[null,null],//危险区域,碰撞区域
-        $tmpBarrier:$(".barrier-low"),
-        lockConsole:true,
-        volSum:0,//音量大小
-        vol:0,
-        score:0,
-        gameEnd:false,
-        walkValue:1,//走的音量临界值
-        jumpValue:~~$('.threshold').val()//起跳的音量临界值
-    }
+        config:{
+            barrierWidth:80,//障碍物宽
+            containerWidth:$('.container').width(),//大容器宽
+            numberOfBarrier:0,//容器障碍物数目
+            rank : 2,//难度1,2,3
+            timer:null,
+            lockMove:false,//锁定移动
+            lockLost:false,//坑来了，开始判断
+            dangerArea:[null,null],//危险区域,碰撞区域
+            $tmpBarrier:$(".barrier-low"),
+            lockConsole:true,
+            volSum:0,//音量大小
+            vol:0,
+            score:0,
+            gameEnd:false,
+            walkValue:1,//走的音量临界值
+            jumpValue:~~$('.threshold').val()//起跳的音量临界值
+        }
   ​
 
 - 初始化
 
   初始化主要是生成载体，填充到页面中。本文主要根据游戏容器的宽，生成初始载体的个数，填充到容器中。
 
-    initStat:function () {//初始化障碍物宽高，初始化载体
-        $('.barrier').width(exports.config.barrierWidth);
-        exports.config.numberOfBarrier = Math.ceil(exports.config.containerWidth / exports.config.barrierWidth) + 2;
-        $('.bottom-barrier').width(exports.config.numberOfBarrier * exports.config.barrierWidth);//障碍物容器宽
-        exports.createBarrier(exports.config.numberOfBarrier);//创建并填充
-    }
+        initStat:function () {//初始化障碍物宽高，初始化载体
+            $('.barrier').width(exports.config.barrierWidth);
+            exports.config.numberOfBarrier = Math.ceil(exports.config.containerWidth / exports.config.barrierWidth) + 2;
+            $('.bottom-barrier').width(exports.config.numberOfBarrier * exports.config.barrierWidth);//障碍物容器宽
+            exports.createBarrier(exports.config.numberOfBarrier);//创建并填充
+        }
 
 
 - 创建载体
 
 本文游戏中的各种物体设计采用的是DOM来实现，当然也可以采用canvas或其他实现。载体移动到一定距离便在容器后面插入一个载体，插入的载体有可能是路，也可能是坑。插入后要把前面移动过的载体删了，以免DOM过多造成的能性能问题。
 
-      createBarrier:function (num) {//创建障碍物，num个数
-        ...//其他代码
-          $bc.append(exports.getBarrier(num,type));
-      },
-      getBarrier:function (num,type) {//获取障碍物
-          var html = "";
-          for(var i = 0; i < num; i++){
-              html += '<div class="barrier '+(type === 1 ? "barrier-high" : "barrier-low")+'" data-id="'+new Date().getTime()+'">》</div>'
-          }
-          return html;
-      }
+        createBarrier:function (num) {//创建障碍物，num个数
+          ...//其他代码
+            $bc.append(exports.getBarrier(num,type));
+        },
+        getBarrier:function (num,type) {//获取障碍物
+            var html = "";
+            for(var i = 0; i < num; i++){
+                html += '<div class="barrier '+(type === 1 ? "barrier-high" : "barrier-low")+'" data-id="'+new Date().getTime()+'">》</div>'
+            }
+            return html;
+        }
 
 
 - 目标物体移动和跳动
 
   当音量达到一定条件，目标物体在视觉中就开始移动，实际我们移动的是目标物体下面的载体。
 
-    letsGo:function (vol) {//达到条件行走或者跳跃
-        if (vol > exports.config.walkValue ) {//走
-            exports.moveBarrier();
-            if (vol > exports.config.jumpValue) {//跳
-                exports.jumpNotes();
-            }
-        }else {//停
-            exports.stopBarrier();
-        }
-    }
+          letsGo:function (vol) {//达到条件行走或者跳跃
+              if (vol > exports.config.walkValue ) {//走
+                  exports.moveBarrier();
+                  if (vol > exports.config.jumpValue) {//跳
+                      exports.jumpNotes();
+                  }
+              }else {//停
+                  exports.stopBarrier();
+              }
+          }
 
 - 碰撞检测
 
   碰撞检测就是对目标物体和碰撞物体之间距离的检测。在本文这个游戏中，采用一个数组来更新碰撞物体，碰撞物体来的时候添加，离开的时候再更新一次。边移动边检测。
 
 
-    judgeLost:function(){//是否失败，碰撞检测
-        ....//其他代码
-        if(exports.config.$tmpBarrier.attr('data-id') !== $barrier.attr("data-id")){//更新碰撞物体
-        ...//其他代码，更新，计分
-        }
-        ...//
-        if (parseInt($notes.css("bottom")) <= 200) {//判断是否在区间
-            var left = exports.config.dangerArea[0],
-                right = exports.config.dangerArea[1];
-            if(left <= 80 && right >= 160){//是否达到碰撞条件
-                exports.lost();
-            }
-        }
-    }
+          judgeLost:function(){//是否失败，碰撞检测
+              ....//其他代码
+              if(exports.config.$tmpBarrier.attr('data-id') !== $barrier.attr("data-id")){//更新碰撞物体
+              ...//其他代码，更新，计分
+              }
+              ...//
+              if (parseInt($notes.css("bottom")) <= 200) {//判断是否在区间
+                  var left = exports.config.dangerArea[0],
+                      right = exports.config.dangerArea[1];
+                  if(left <= 80 && right >= 160){//是否达到碰撞条件
+                      exports.lost();
+                  }
+              }
+          }
 
 - 失败重置
 
   游戏失败后会重新初始化设置参数，重复以上步骤
 
-    lost:function () {//输了掉坑了
-        $('.title').text('啊！掉坑了！重新来一遍吧！');//一下是重置部分
-        exports.stopBarrier();
-        exports.config.gameEnd = true;
-        $notes.stop(true).animate({bottom:0},500)
-        setTimeout(function () {
-            exports.config.gameEnd = false;
-            $('.bottom-barrier').html("");
-            exports.initStat();
-            $notes.css("bottom",200)
-            $('.title').text('大声点！不要停！八分音符酱')
-            exports.config.score = 0;
-            $('.j_score').text(exports.config.score);
-        }, 3000)
-    }
+          lost:function () {//输了掉坑了
+              $('.title').text('啊！掉坑了！重新来一遍吧！');//一下是重置部分
+              exports.stopBarrier();
+              exports.config.gameEnd = true;
+              $notes.stop(true).animate({bottom:0},500)
+              setTimeout(function () {
+                  exports.config.gameEnd = false;
+                  $('.bottom-barrier').html("");
+                  exports.initStat();
+                  $notes.css("bottom",200)
+                  $('.title').text('大声点！不要停！八分音符酱')
+                  exports.config.score = 0;
+                  $('.j_score').text(exports.config.score);
+              }, 3000)
+          }
 
 
 #### 利用webAudio控制游戏的行走和跳跃
@@ -180,7 +180,7 @@
   `navigator.getUserMedia`在pc的兼容一般是
 
 
-   navigator.getUserMedia = (navigator.getUserMedia ||
+        navigator.getUserMedia = (navigator.getUserMedia ||
                    navigator.webkitGetUserMedia ||
                    navigator.mozGetUserMedia ||
                    navigator.msGetUserMedia);
@@ -207,7 +207,7 @@ webAudioApi是W3C制定的用来处理web音频的规范。核心是 `AudioConte
 
 实现过程：webAudio获取到麦克风音频源后，连接到ScriptProcess节点，ScriptProcess可以获取音频输入数据，并将音频实时输出，从而达到返耳效果。
 
-  var source=exports.audioContext.createMediaStreamSource(stream);
+          var source=exports.audioContext.createMediaStreamSource(stream);
             //用于录音的processor节点
             var recorder=exports.audioContext.createScriptProcessor(1024,1,1);
             source.connect(recorder);//节点的连接
@@ -229,7 +229,7 @@ webAudioApi是W3C制定的用来处理web音频的规范。核心是 `AudioConte
 
 利用webAudioApi的Analyser接口可以获取到音频经过傅里叶变换后的数据，这些数据包含了音频振幅等信息。如果要实时获取音频振幅大小，需要在 `onaudioprocess` 中获取数据。由于麦克风获取到的音频噪音成分有点大，此处作一个加权处理，平均后的值作为目标振幅值。最后根据处理后的音频振幅进行游戏的行走和跳跃。
 
-      var analyser = exports.audioContext.createAnalyser();//音频解析器
+          var analyser = exports.audioContext.createAnalyser();//音频解析器
             recorder.connect(analyser);
             analyser.connect(exports.audioContext.destination);
             // 设置数据
