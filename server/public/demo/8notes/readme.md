@@ -12,13 +12,13 @@
 
 ## 开始
 
-> 先看下游戏的截图吧，体验地址 [https://zhazhaxia.github.io/server/public/demo/8notes/index.html](https://zhazhaxia.github.io/server/public/demo/8notes/index.html "八分音符酱")
+先看下游戏的截图吧，体验地址 [https://zhazhaxia.github.io/server/public/demo/8notes/index.html](https://zhazhaxia.github.io/server/public/demo/8notes/index.html "八分音符酱")
 
 ![H5八分音符酱](http://i.imgur.com/aNzryFk.png)
 
 **玩法**
 
-  连接耳机后，最好在微信或手Q打开这个页面（系统需android5.0+），同意获取麦克风权限。然后对着麦克风大声说几句话，如“啊……”，然后游戏里面的doge就会开始走了，声音大到一定程度，doge就会跳起来，掉坑则输。
+连接耳机后，最好在微信或手Q打开这个页面（系统需android5.0+），同意获取麦克风权限。然后对着麦克风大声说几句话，如“啊……”，然后游戏里面的doge就会开始走了，声音大到一定程度，doge就会跳起来，掉坑则输。
 
 ## 游戏建模
 
@@ -100,7 +100,7 @@
 
 - 创建载体
 
-本文游戏中的各种物体设计采用的是DOM来实现，当然也可以采用canvas或其他实现。载体移动到一定距离便在容器后面插入一个载体，插入的载体有可能是路，也可能是坑。插入后要把前面移动过的载体删了，以免DOM过多造成的能性能问题。
+  本文游戏中的各种物体设计采用的是DOM来实现，当然也可以采用canvas或其他实现。载体移动到一定距离便在容器后面插入一个载体，插入的载体有可能是路，也可能是坑。插入后要把前面移动过的载体删了，以免DOM过多造成的能性能问题。
 
     createBarrier:function (num) {//创建障碍物，num个数
       ...//其他代码
@@ -193,41 +193,42 @@
 
 - 简要介绍
 
-webAudioApi是W3C制定的用来处理web音频的规范。核心是 `AudioContext` ， `AudioContext` 是处理web音频的核心对象，所有的处理接口以节点方式连接。如下图所示，描述了一个源节点到目标节点的web音频处理过程。
+  webAudioApi是W3C制定的用来处理web音频的规范。核心是 `AudioContext` ， `AudioContext` 是处理web音频的核心对象，所有的处理接口以节点方式连接。如下图所示，描述了一个源节点到目标节点的web音频处理过程。
 
 
 ![audio context](http://i.imgur.com/RsnkTgj.png)
 
 - 录音音频返耳
 
+  音频返耳指的是在录音的过程中，麦接收的音频在耳机的实时反馈。
 
-> 音频返耳指的是在录音的过程中，麦接收的音频在耳机的实时反馈。
+  利用webAudioApi的scriptProcessNode可以获取到麦克风的音频数据，将音频数据再输出，就会有返耳效果。
 
-利用webAudioApi的scriptProcessNode可以获取到麦克风的音频数据，将音频数据再输出，就会有返耳效果。
+  实现过程：webAudio获取到麦克风音频源后，连接到ScriptProcess节点，ScriptProcess可以获取音频输入数据，并将音频实时输出，从而达到返耳效果。
 
-实现过程：webAudio获取到麦克风音频源后，连接到ScriptProcess节点，ScriptProcess可以获取音频输入数据，并将音频实时输出，从而达到返耳效果。
+  ​
 
-    var source=exports.audioContext.createMediaStreamSource(stream);
-      //用于录音的processor节点
-      var recorder=exports.audioContext.createScriptProcessor(1024,1,1);
-      source.connect(recorder);//节点的连接
-      recorder.onaudioprocess=function(e){//正在录音
-          var inputBuffer = e.inputBuffer;
-          var outputBuffer = e.outputBuffer;
-          for (var channel = 0; channel < outputBuffer.numberOfChannels; channel++) {
-              var inputData = inputBuffer.getChannelData(channel);//音频输入
-              var outputData = outputBuffer.getChannelData(channel);
-              for (var sample = 0; sample < inputBuffer.length; sample++) {
-                outputData[sample] = inputData[sample];//返耳
-              }
-          }
-      };
+      var source=exports.audioContext.createMediaStreamSource(stream);
+        //用于录音的processor节点
+        var recorder=exports.audioContext.createScriptProcessor(1024,1,1);
+        source.connect(recorder);//节点的连接
+        recorder.onaudioprocess=function(e){//正在录音
+            var inputBuffer = e.inputBuffer;
+            var outputBuffer = e.outputBuffer;
+            for (var channel = 0; channel < outputBuffer.numberOfChannels; channel++) {
+                var inputData = inputBuffer.getChannelData(channel);//音频输入
+                var outputData = outputBuffer.getChannelData(channel);
+                for (var sample = 0; sample < inputBuffer.length; sample++) {
+                  outputData[sample] = inputData[sample];//返耳
+                }
+            }
+        };
 
 - 音频振幅信息
 
-> 获取音频振幅可以理解为获取音频的音量大小。
+  *获取音频振幅可以理解为获取音频的音量大小。*
 
-利用webAudioApi的Analyser接口可以获取到音频经过傅里叶变换后的数据，这些数据包含了音频振幅等信息。如果要实时获取音频振幅大小，需要在 `onaudioprocess` 中获取数据。由于麦克风获取到的音频噪音成分有点大，此处作一个加权处理，平均后的值作为目标振幅值。最后根据处理后的音频振幅进行游戏的行走和跳跃。
+  利用webAudioApi的Analyser接口可以获取到音频经过傅里叶变换后的数据，这些数据包含了音频振幅等信息。如果要实时获取音频振幅大小，需要在 `onaudioprocess` 中获取数据。由于麦克风获取到的音频噪音成分有点大，此处作一个加权处理，平均后的值作为目标振幅值。最后根据处理后的音频振幅进行游戏的行走和跳跃。
 
     var analyser = exports.audioContext.createAnalyser();//音频解析器
       recorder.connect(analyser);
@@ -242,9 +243,9 @@ webAudioApi是W3C制定的用来处理web音频的规范。核心是 `AudioConte
           }
       };
 
-> 由于不同硬件之间的差距，返耳效果的延迟有所区别
+  ​***1.由于不同硬件之间的差距，返耳效果的延迟有所区别***
 
-> 由于PC跟手机硬件有所区别，实际的振幅值，PC会明显高于手机
+  ​***2.由于PC跟手机硬件有所区别，实际的振幅值，PC会明显高于手机***
 
 
 以上就是本文游戏的主要设计的相关思路。
