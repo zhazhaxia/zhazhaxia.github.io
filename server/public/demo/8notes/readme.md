@@ -12,7 +12,7 @@
 
 ## 开始
 
-先看下游戏的截图吧，体验地址 [https://zhazhaxia.github.io/server/public/demo/8notes/index.html](https://zhazhaxia.github.io/server/public/demo/8notes/index.html "八分音符酱")
+先看下游戏的截图吧，体验地址(由于系统兼容问题，建议复制地址在微信内webview打开) [https://zhazhaxia.github.io/server/public/demo/8notes/index.html](https://zhazhaxia.github.io/server/public/demo/8notes/index.html "八分音符酱")
 
 ![H5八分音符酱](http://i.imgur.com/aNzryFk.png)
 
@@ -102,17 +102,18 @@
 
   本文游戏中的各种物体设计采用的是DOM来实现，当然也可以采用canvas或其他实现。载体移动到一定距离便在容器后面插入一个载体，插入的载体有可能是路，也可能是坑。插入后要把前面移动过的载体删了，以免DOM过多造成的能性能问题。
 
-    createBarrier:function (num) {//创建障碍物，num个数
-      ...//其他代码
-        $bc.append(exports.getBarrier(num,type));
-    },
-    getBarrier:function (num,type) {//获取障碍物
-        var html = "";
-        for(var i = 0; i < num; i++){
-            html += '<div class="barrier '+(type === 1 ? "barrier-high" : "barrier-low")+'" data-id="'+new Date().getTime()+'">》</div>'
-        }
-        return html;
-    }
+
+	    createBarrier:function (num) {//创建障碍物，num个数
+	      ...//其他代码
+	        $bc.append(exports.getBarrier(num,type));
+	    },
+	    getBarrier:function (num,type) {//获取障碍物
+	        var html = "";
+	        for(var i = 0; i < num; i++){
+	            html += '<div class="barrier '+(type === 1 ? "barrier-high" : "barrier-low")+'" data-id="'+new Date().getTime()+'">》</div>'
+	        }
+	        return html;
+	    }
 
 
 - 目标物体移动和跳动
