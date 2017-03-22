@@ -230,7 +230,7 @@
   利用webAudioApi的Analyser接口可以获取到音频经过傅里叶变换后的数据，这些数据包含了音频振幅等信息。如果要实时获取音频振幅大小，需要在 `onaudioprocess` 中获取数据。由于麦克风获取到的音频噪音成分有点大，此处作一个加权处理，平均后的值作为目标振幅值。最后根据处理后的音频振幅进行游戏的行走和跳跃。
 ​
 
-    var analyser = exports.audioContext.createAnalyser();//音频解析器
+      var analyser = exports.audioContext.createAnalyser();//音频解析器
       recorder.connect(analyser);
       analyser.connect(exports.audioContext.destination);
       // 设置数据
