@@ -205,8 +205,7 @@
   利用webAudioApi的scriptProcessNode可以获取到麦克风的音频数据，将音频数据再输出，就会有返耳效果。
 
   实现过程：webAudio获取到麦克风音频源后，连接到ScriptProcess节点，ScriptProcess可以获取音频输入数据，并将音频实时输出，从而达到返耳效果。
-
-  ​
+​
 
       var source=exports.audioContext.createMediaStreamSource(stream);
         //用于录音的processor节点
@@ -229,6 +228,7 @@
   *获取音频振幅可以理解为获取音频的音量大小。*
 
   利用webAudioApi的Analyser接口可以获取到音频经过傅里叶变换后的数据，这些数据包含了音频振幅等信息。如果要实时获取音频振幅大小，需要在 `onaudioprocess` 中获取数据。由于麦克风获取到的音频噪音成分有点大，此处作一个加权处理，平均后的值作为目标振幅值。最后根据处理后的音频振幅进行游戏的行走和跳跃。
+​
 
     var analyser = exports.audioContext.createAnalyser();//音频解析器
       recorder.connect(analyser);
@@ -242,10 +242,11 @@
               exports.getVolume(dataArray);//加权振幅
           }
       };
+​
 
-  ​***1.由于不同硬件之间的差距，返耳效果的延迟有所区别***
+  *1.由于不同硬件之间的差距，返耳效果的延迟有所区别*
 
-  ​***2.由于PC跟手机硬件有所区别，实际的振幅值，PC会明显高于手机***
+  ​*2.由于PC跟手机硬件有所区别，实际的振幅值，PC会明显高于手机*
 
 
 以上就是本文游戏的主要设计的相关思路。
