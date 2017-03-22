@@ -66,24 +66,24 @@
   游戏中涉及到一些参数的配置用来控制游戏的状态，具体的配置可以在编写的时候生成，这里有本文部分的配置信息。
 
 
-    config:{
-      barrierWidth:80,//障碍物宽
-      containerWidth:$('.container').width(),//大容器宽
-      numberOfBarrier:0,//容器障碍物数目
-      rank : 2,//难度1,2,3
-      timer:null,
-      lockMove:false,//锁定移动
-      lockLost:false,//坑来了，开始判断
-      dangerArea:[null,null],//危险区域,碰撞区域
-      $tmpBarrier:$(".barrier-low"),
-      lockConsole:true,
-      volSum:0,//音量大小
-      vol:0,
-      score:0,
-      gameEnd:false,
-      walkValue:1,//走的音量临界值
-      jumpValue:~~$('.threshold').val()//起跳的音量临界值
-    }
+      config:{
+          barrierWidth:80,//障碍物宽
+          containerWidth:$('.container').width(),//大容器宽
+          numberOfBarrier:0,//容器障碍物数目
+          rank : 2,//难度1,2,3
+          timer:null,
+          lockMove:false,//锁定移动
+          lockLost:false,//坑来了，开始判断
+          dangerArea:[null,null],//危险区域,碰撞区域
+          $tmpBarrier:$(".barrier-low"),
+          lockConsole:true,
+          volSum:0,//音量大小
+          vol:0,
+          score:0,
+          gameEnd:false,
+          walkValue:1,//走的音量临界值
+          jumpValue:~~$('.threshold').val()//起跳的音量临界值
+      }
   ​
 
 - 初始化
@@ -101,8 +101,6 @@
 - 创建载体
 
 本文游戏中的各种物体设计采用的是DOM来实现，当然也可以采用canvas或其他实现。载体移动到一定距离便在容器后面插入一个载体，插入的载体有可能是路，也可能是坑。插入后要把前面移动过的载体删了，以免DOM过多造成的能性能问题。
-
-
 
     createBarrier:function (num) {//创建障碍物，num个数
       ...//其他代码
@@ -137,20 +135,20 @@
   碰撞检测就是对目标物体和碰撞物体之间距离的检测。在本文这个游戏中，采用一个数组来更新碰撞物体，碰撞物体来的时候添加，离开的时候再更新一次。边移动边检测。
 
 
-    judgeLost:function(){//是否失败，碰撞检测
-        ....//其他代码
-        if(exports.config.$tmpBarrier.attr('data-id') !== $barrier.attr("data-id")){//更新碰撞物体
-        ...//其他代码，更新，计分
-        }
-        ...//
-        if (parseInt($notes.css("bottom")) <= 200) {//判断是否在区间
-            var left = exports.config.dangerArea[0],
-                right = exports.config.dangerArea[1];
-            if(left <= 80 && right >= 160){//是否达到碰撞条件
-                exports.lost();
-            }
-        }
-    }
+      judgeLost:function(){//是否失败，碰撞检测
+          ....//其他代码
+          if(exports.config.$tmpBarrier.attr('data-id') !== $barrier.attr("data-id")){//更新碰撞物体
+          ...//其他代码，更新，计分
+          }
+          ...//
+          if (parseInt($notes.css("bottom")) <= 200) {//判断是否在区间
+              var left = exports.config.dangerArea[0],
+                  right = exports.config.dangerArea[1];
+              if(left <= 80 && right >= 160){//是否达到碰撞条件
+                  exports.lost();
+              }
+          }
+      }
 
 - 失败重置
 
@@ -182,10 +180,10 @@
   `navigator.getUserMedia`在pc的兼容一般是
 
 
-    navigator.getUserMedia = (navigator.getUserMedia ||
-               navigator.webkitGetUserMedia ||
-               navigator.mozGetUserMedia ||
-               navigator.msGetUserMedia);
+      navigator.getUserMedia = (navigator.getUserMedia ||
+                 navigator.webkitGetUserMedia ||
+                 navigator.mozGetUserMedia ||
+                 navigator.msGetUserMedia);
 
 
 
