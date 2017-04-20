@@ -1,0 +1,370 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+p,
+img {
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft YaHei", "Helvetica Neue Custom", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+}
+ul {
+  list-style: none;
+}
+a {
+  color: #333;
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+.ie {
+  text-align: center;
+  margin-top: 50px;
+}
+.section-inner {
+  width: 1200px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+}
+.divider-line {
+  width: 200px;
+  border-bottom: 2px solid #32A7B8;
+  margin: 2.5rem auto;
+}
+.header {
+  height: 80px;
+  position: relative;
+  border-bottom: solid 1px #eee;
+}
+.header h1 {
+  padding-top: 8px;
+  width: 250px;
+  float: left;
+}
+.header h1 a {
+  display: block;
+}
+.header ul {
+  float: right;
+  margin-top: 5px;
+  margin-right: 20px;
+}
+.header ul li {
+  float: left;
+}
+.header ul li a {
+  display: block;
+  padding: 10px;
+  margin: 15px 3px;
+}
+.header ul li a strong {
+  color: #555;
+  font-weight: bold;
+  font-size: 16px;
+}
+.feature-section {
+  color: #333;
+  text-align: center;
+  padding: 1px 0;
+}
+.feature-section a {
+  display: block;
+}
+.feature-section h3 {
+  margin: 40px 0 20px 0;
+  font-size: 28px;
+}
+.feature-section h5 {
+  font-size: 14px;
+  font-weight: normal;
+}
+.feature-section .list {
+  width: 1280px;
+  display: table;
+  text-align: center;
+  margin: 0 auto;
+}
+.feature-section.intro h2 {
+  font-size: 42px;
+  padding: 60px 0 25px 0;
+}
+.feature-section.intro h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #555;
+  padding-bottom: 30px;
+}
+.feature-section.intro .btn-info {
+  width: 238px;
+  display: block;
+  border-radius: 5px;
+  padding: 17px 0;
+  margin: 0 auto;
+  font-size: 22px;
+  text-align: center;
+  color: #fff;
+  outline: 0;
+  background: #5A9090;
+  transition: all 0.5s ease 0s;
+  -ms-transition: all 0.5s ease 0s;
+  -moz-transition: all 0.5s ease 0s;
+  -webkit-transition: all 0.5s ease 0s;
+}
+.feature-section.intro .btn-info:hover {
+  background: #70A8A8;
+}
+.feature-section.intro .list-info {
+  width: 550px;
+  padding: 30px 0;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 1.5;
+  animation: fade-in 1s;
+  -ms-animation: fade-in 1s;
+  -moz-animation: fade-in 1s;
+  -webkit-animation: fade-in 1s;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    margin-top: 200px;
+  }
+  40% {
+    opacity: 0;
+    margin-top: 200px;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+.feature-section.intro .list-info li {
+  text-indent: 30px;
+}
+.feature-section.culture h6,
+.feature-section.structure h6 {
+  font-size: 25px;
+  font-weight: normal;
+}
+.feature-section.culture .list-panel,
+.feature-section.structure .list-panel {
+  display: table-cell;
+  cursor: pointer;
+}
+.feature-section.culture {
+  color: #fff;
+  background: url('../../image/tasytt-pattern.png');
+}
+.feature-section.culture .list {
+  padding: 40px 0 20px 0;
+}
+.feature-section.culture .list .list-panel {
+  height: 362px;
+  position: relative;
+}
+.feature-section.culture .list .list-panel .panel-inner {
+  width: 100%;
+  position: absolute;
+  top: 30%;
+}
+.feature-section.culture .list .list-panel .text-line {
+  width: 29px;
+  height: 2px;
+  background: #fff;
+  opacity: 1;
+  margin: 35px auto;
+}
+.feature-section.culture .list .list-panel ul li {
+  opacity: 0;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.feature-section.culture .list .list-panel .panel-inner,
+.feature-section.culture .list .list-panel .text-line,
+.feature-section.culture .list .list-panel ul li {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.feature-section.culture .list .list-panel:hover .panel-inner {
+  top: 17%;
+}
+.feature-section.culture .list .list-panel:hover .text-line {
+  opacity: 0;
+  margin-top: 0;
+}
+.feature-section.culture .list .list-panel:hover ul li {
+  opacity: 1;
+}
+.feature-section.structure h3 {
+  color: #70A8A8;
+}
+.feature-section.structure .list .list-panel {
+  width: 256px;
+  padding: 10px 0 30px 0;
+  position: relative;
+  z-index: 1;
+}
+.feature-section.structure .list .list-panel ul {
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 20px;
+  transform: translateY(-30px);
+  -ms-transform: translateY(-30px);
+  -moz-transform: translateY(-30px);
+  -webkit-transform: translateY(-30px);
+}
+.feature-section.structure .list .list-panel ul li {
+  font-size: 14px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: -1;
+}
+.feature-section.structure .list .list-panel ul li:before {
+  content: "— ";
+}
+.feature-section.structure .list .list-panel:hover ul {
+  opacity: 1;
+  transform: translateY(0);
+  -ms-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -webkit-transform: translateY(0);
+}
+.feature-section.product li {
+  width: 320px;
+  height: 210px;
+  display: table-cell;
+  text-align: center;
+  background: url('../../image/upgrade/product01.jpg') no-repeat;
+  background-size: cover;
+}
+.feature-section.product li.second {
+  background-image: url('../../image/upgrade/product02.jpg');
+}
+.feature-section.product li.third {
+  background-image: url('../../image/upgrade/product03.jpg');
+}
+.feature-section.product li.fourth {
+  background-image: url('../../image/upgrade/product04.jpg');
+}
+.feature-section.device .list {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+.feature-section.device ul {
+  position: relative;
+  width: 8000px;
+  animation: slide infinite 50s linear;
+  -ms-animation: slide infinite 50s linear;
+  -moz-animation: slide infinite 50s linear;
+  -webkit-animation: slide infinite 50s linear;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-2480px);
+    -ms-transform: translateX(-2480px);
+    -moz-transform: translateX(-2480px);
+    -webkit-transform: translateX(-2480px);
+  }
+  100% {
+    transform: translateX(0);
+    -ms-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -webkit-transform: translateX(0);
+  }
+}
+.feature-section.device li {
+  width: 320px;
+  height: 210px;
+  float: left;
+  border-radius: 10px;
+  margin: 0 6px;
+  background: url('../../image/upgrade/device01.jpg') no-repeat;
+  background-size: cover;
+}
+.feature-section.device li.second {
+  background-image: url('../../image/upgrade/device02.jpg');
+}
+.feature-section.device li.third {
+  background-image: url('../../image/upgrade/device03.jpg');
+}
+.feature-section.device li.fourth {
+  background-image: url('../../image/upgrade/device04.jpg');
+}
+.feature-section.device li.fifth {
+  background-image: url('../../image/upgrade/device05.jpg');
+}
+.feature-section.device li.sixth {
+  background-image: url('../../image/upgrade/device06.jpg');
+}
+.feature-section.partner {
+  text-align: center;
+}
+.feature-section.partner img {
+  display: inline-block;
+}
+.footer {
+  width: 100%;
+  margin: 0 auto;
+  background: #333;
+  color: #939393;
+  font-size: 18px;
+  padding: 50px 0;
+}
+.footer h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.footer .footer-cooper {
+  float: left;
+}
+.footer .footer-cooper ul {
+  overflow: hidden;
+}
+.footer .footer-cooper ul li {
+  padding: 4px 10px;
+  cursor: pointer;
+  min-width: 100px;
+  font-size: 12px;
+  line-height: 1.5;
+  float: left;
+}
+.footer .footer-copyright {
+  width: 380px;
+  padding: 0 20px 0 20px;
+  float: right;
+  margin-right: 40px;
+}
+.footer .footer-copyright p {
+  padding: 4px 10px;
+  cursor: pointer;
+  line-height: 1.5;
+  font-size: 12px;
+}
