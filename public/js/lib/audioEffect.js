@@ -32,7 +32,7 @@ define('./js/lib/audioEffect',function( require, exports, module){
             this.cancelJob();
             var audioContext = this.audioContext,
                 source = this.source,
-                gain = audioContext.createGain(1),
+                gain1 = audioContext.createGain(1),
                 gain2 = audioContext.createGain(1),
                 gain3 = audioContext.createGain(),
                 channelSplitter = audioContext.createChannelSplitter(2),
@@ -51,7 +51,7 @@ define('./js/lib/audioEffect',function( require, exports, module){
             filterhigh.Q.value = 0;
 
             // 反相音频组合
-            gain.gain.value = -1;
+            gain1.gain.value = -1;
             gain2.gain.value = -1;
 
             // 方案 a
@@ -65,8 +65,8 @@ define('./js/lib/audioEffect',function( require, exports, module){
             gain3.connect(channelSplitter);
 
             // 2-1>2
-            channelSplitter.connect(gain, 0);
-            gain.connect(channelMerger, 0, 1);
+            channelSplitter.connect(gain1, 0);
+            gain1.connect(channelMerger, 0, 1);
             channelSplitter.connect(channelMerger, 1, 1);
 
             //1-2>1
