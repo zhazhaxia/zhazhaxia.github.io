@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>wrap-zhazhaxia</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Language" content="zh-cn" />
+    <meta name="author" content="Tencent-ISUX-Music" />
+    <meta name="Copyright" content="Tencent" />
+    <meta name="applicable-device" content="mobile">
+    <!--关键字和描述一定要写-->
+    <meta name="description" content="不要停！八分音符酱，游戏，H5，手机，HTML5，zhazhaxia" />
+    <meta name="keywords" content="不要停！八分音符酱，游戏，H5，手机，HTML5，zhazhaxia" />
+    <!--如果该页面只适合在手机上进行浏览，请添加以下代码-->
+    <meta name="applicable-device" content="mobile">
+    <style type="text/css">
+        /** { touch-action: none; }*/
+        html,body{width:100%;height:100%;/*touch-action: none;*/}
+        html,body,div,p,h1,span,section{margin:0;padding:0;font-family: "微软雅黑";}
+        html,body,section{width:100%;height:100%;}
+        .container{position: relative;width: 100%;margin:0 auto;background: -webkit-linear-gradient( top,rgb(102,143,250),rgb(233,201,211));overflow: hidden;}
+        .title{text-align: center;}
+        .bottom-barrier{height: 200px;width:/*200%*/;position: absolute;bottom: 0;left: 0;display: flex;flex-direction:row;flex-wrap: nowrap;justify-content:flex-start;align-items:flex-end;}
+        .barrier{width: 80px;}
+        .barrier-high{background-color:#222;background: -webkit-linear-gradient( top,rgb(39,40,34),rgb(66,63,40));height: 100%;color:#fff;line-height: 200px;text-align: center;-webkit-animation:a_text 2s linear 0s infinite normal;}
+        .barrier-low{height: 1px;}
+        .notes{width: 80px;height: 80px;position: absolute;left: 80px;bottom: 200px;background-color: orange;background-image: url(https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/314e251f95cad1c8eaa2af64793e6709c93d5153.jpg);background-size: cover;}
+        .bqb{width:100px;height:100px;position: absolute;background-size: cover;display:none;}
+        .wrap{width: 100%;height:100%;position: relative;}
+        .wrap-body{transform:translate3d(0px,0px,0px);transition:all 200ms ease-out;}
+        .wrap1{background-color: #efd;}
+        .wrap2{background-color: #e9d;}
+    </style>
+</head>
+<body>
+<section class="container">
+    <section class="wrap-body">
+        <div class="wrap wrap1">
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+        </div>
+        <div class="wrap wrap2">
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+        </div>
+        <div class="wrap wrap1">
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+        </div>
+        <div class="wrap wrap2">
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+        </div>
+        <div class="wrap wrap1">
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+        </div>
+    </section>
+    
+</section>
+
+
+<script src="//kg.qq.com/gtimg/music/kg/zepto.js?_bid=2241&max_age=31104000000"></script>  
+<script type="text/javascript" src="//imgcache.gtimg.cn/music/kg/lib/sea-kg.js?max_age=31104000000"></script>
+<script type="text/javascript">
+define('main',function (require,exports,module) {
+    var wrap = require('wrap')
+    wrap.init();
+    exports = module.exports = {
+        init:function () {
+            
+        },
+        bind:function () {
+            
+        }
+    }
+})
+define('wrap',function (require,exports,module) {
+    exports = module.exports = {
+        init:function () {
+            exports.initWrap()
+            exports.bind();
+        },
+        config:{
+            index:0
+        },
+        initWrap:function () {
+            var $container = $('.container'),
+                $wrap = $('.wrap')
+            $wrap.height($container.height())
+
+            $('.wrap-body').height($wrap.length*$container.width())
+        },
+        bind:function () {
+            $(document.body).on('touchstart', function(e) {
+                // console.log(e)
+                var sY = e.touches[0].clientY,
+                    offset = 0,
+                    $wrap = $('.wrap-body'),
+                    nowTop = exports.getTop($wrap.css('transform'));
+                $wrap.css('transition',"")
+                $(document.body).on('touchmove', function(e) {
+                    offset = e.targetTouches[0].clientY - sY;
+                    $wrap.css('transform','translate3d(0px,'+(nowTop + offset) + 'px,0px)')
+                })
+                $(document.body).on('touchend', function(e) {
+                    // console.log(e)
+                    $wrap.css('transition',"all 200ms ease-out")
+                    offset = e.changedTouches[0].clientY - sY;
+                    if (offset > 0) {
+                        exports.config.index--;
+                        if (exports.config.index < 0 ) exports.config.index = 0
+                        $wrap.css('transform','translate3d(0px,'+(-exports.config.index*$('body').height()) + 'px,0px)')
+                    }else {
+                        exports.config.index++;
+                        if (exports.config.index >= ($('.wrap').length-1) ) exports.config.index = $('.wrap').length-1
+                        $wrap.css('transform','translate3d(0px,'+(-exports.config.index* $('body').height()) + 'px,0px)')
+                    }
+                    // $wrap.css('transform','translate3d(0px,'+(nowTop + offset) + 'px,0px)')
+                    $(document.body).off('touchend')
+                })
+            })
+        },
+        getTop:function (top) {
+            return top.indexOf('matrix') >=0 ? parseInt(top.match(/(-?\d)+/ig)[5]) : parseInt(top.match(/(-?\d)+/ig)[2])
+        }
+    }
+})
+seajs.use('main',function (ex) {
+    ex.init()
+})
+</script>
+</body>
+</html>
