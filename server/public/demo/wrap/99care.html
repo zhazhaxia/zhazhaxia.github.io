@@ -91,7 +91,7 @@ define('main',function (require,exports,module) {
         },
         bind:function () {
             $(document).on('click', function() {
-                clearInterval(exports.config.timer)               
+                // clearInterval(exports.config.timer)               
             });
         },
         initData:function () {
@@ -126,7 +126,7 @@ define('main',function (require,exports,module) {
                 exports.convertRedGreen(imgData.data)
                 // console.log(imgData)
                 ctx.putImageData(imgData,0,0)
-            },30);
+            },100);
         },
         convertToGray:function (data) {//灰色
             var len=data.length
