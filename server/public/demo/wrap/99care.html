@@ -31,12 +31,15 @@
         .wrap-body{transform:translate3d(0px,0px,0px);transition:all 200ms ease-out;}
         .wrap1{background-color: #efd;}
         .wrap2{background-color: #e9d;}
+
+        .change-state{position: absolute;left: 0;bottom: 0;}
     </style>
 </head>
 <body>
 <section class="container">
     <section class="wrap-body">
         <div class="wrap wrap1">
+            <div class="change-state">change</div>
             <canvas class="videoCanvas"></canvas>
         </div>
         <div class="wrap wrap2">
@@ -44,6 +47,7 @@
             <p>aa</p>
             <p>aa</p>
             <p>aa</p>
+
         </div>
         <div class="wrap wrap1">
             <p>aa</p>
@@ -87,11 +91,15 @@ define('main',function (require,exports,module) {
             timer:null,
             $video :$('.video'),
             $canvas:$('.videoCanvas'),
-            ctx : $('.videoCanvas')[0].getContext('2d')
+            ctx : $('.videoCanvas')[0].getContext('2d'),
+            state:1
         },
         bind:function () {
             $(document).on('click', function() {
                 // clearInterval(exports.config.timer)               
+            }).on('click', '.change-state', function() {
+                exports.config.state++
+                if (exports.config.state > 5) exports.config.state = 1;
             });
         },
         initData:function () {
@@ -102,7 +110,7 @@ define('main',function (require,exports,module) {
             // console.log(idx)
         },
         openMedia:function () {
-            navigator.getUserMedia({video:true},function (stream) {
+            navigator.getUserMedia({audio:true,video:{width:exports.config.width,height:exports.config.height,facingMode: { exact: "environment" } }},function (stream) {
                 var video = exports.config.$video[0]
                 video.src = URL.createObjectURL(stream)
                 video.onloadedmetadata = function () {
@@ -120,10 +128,22 @@ define('main',function (require,exports,module) {
                 ctx.drawImage(video, 0, 0)
                 
                 var imgData=ctx.getImageData(0,0,exports.config.width,exports.config.height)
-                // exports.convertToGray(imgData.data)
-                // exports.convertToNoRed(imgData.data)
-                // exports.convertToNoGreen(imgData.data)
-                exports.convertRedGreen(imgData.data)
+                switch (exports.config.state) {
+                    case 1:
+                        exports.convertToGray(imgData.data)
+                        break;
+                    case 2:
+                        exports.convertToNoRed(imgData.data)
+                        break;
+                    case 3:
+                        exports.convertToNoGreen(imgData.data)
+                        break;
+                    case 4:
+                        exports.convertRedGreen(imgData.data)
+                        break;
+                    case 5:
+                        break;
+                }
                 // console.log(imgData)
                 ctx.putImageData(imgData,0,0)
             },100);
