@@ -153,7 +153,7 @@ define('main',function (require,exports,module) {
                 }
                 // console.log(imgData)
                 ctx.putImageData(imgData,0,0)
-            },100);
+            },30);
         },
         getTapColor:function (opt) {
             var ctx = exports.config.ctx,
@@ -168,7 +168,7 @@ define('main',function (require,exports,module) {
             var b = imgData.data[index*4+2]
 
             // alert(r+'-'+g+'-'+b)
-            $('.change-state').append(r+'-'+g+'-'+b)
+            // $('.change-state').html(r+'-'+g+'-'+b)
             exports.judgeGame({r:r,g:g,b:b});
         },
         convertToGray:function (data) {//灰色 最严重
@@ -238,35 +238,40 @@ define('main',function (require,exports,module) {
             switch (exports.config.state) {
                 case 1://gray
                     if (opt.r > 200 && opt.g < 80 && opt.b < 80)exports.config.result.push(1)
-                    if (opt.r < 80 && opt.g >200 && opt.b < 80)exports.config.result.push(1)
-                    if (opt.r < 80 && opt.g < 80 && opt.b > 200)exports.config.result.push(1)
+                    if (opt.r < 90 && opt.g >180 && opt.b < 90)exports.config.result.push(2)
+                    if (opt.r < 90 && opt.g < 90 && opt.b > 180)exports.config.result.push(3)
 
                     if (exports.config.result.length === 3 ){
                         alert('恭喜治愈了一位全色盲患者')
+                        exports.config.state = 6
                     }
                     break;
                 case 2://red
                     if (opt.r > 200 && opt.g < 80 && opt.b < 80) {
                         alert('恭喜治愈了一位红色盲患者')
+                        exports.config.state = 6
                     }
                     break;
                 case 3://green
-                    if (opt.r < 80 && opt.g >200 && opt.b < 80) {
+                    if (opt.r < 90 && opt.g >180 && opt.b < 90) {
                         alert('恭喜治愈了一位绿色盲患者')
+                        exports.config.state = 6
                     }
                     break;
                 case 4://blue
-                    if (opt.r < 80 && opt.g < 80 && opt.b > 200) {
+                    if (opt.r < 90 && opt.g < 90 && opt.b > 180) {
                         alert('恭喜治愈了一位蓝色盲患者')
+                        exports.config.state = 6
                     }
                     break;
                     break;
                 case 5://red green
                     if (opt.r > 200 && opt.g < 80 && opt.b < 80)exports.config.result.push(1)
-                    if (opt.r < 80 && opt.g >200 && opt.b < 80)exports.config.result.push(1)
+                    if (opt.r < 90 && opt.g >180 && opt.b < 90)exports.config.result.push(2)
 
                     if (exports.config.result.length === 2 ){
                         alert('恭喜治愈了一位红绿色盲患者')
+                        exports.config.state = 6
                     }
                     break;
             }
