@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>关爱色盲宣传-zhazhaxia</title>
+    <title>为爱点亮五彩世界-zhazhaxia</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="Content-Language" content="zh-cn" />
@@ -18,24 +18,57 @@
         html,body{ touch-action: none; font-family: '微软雅黑';}
         html,body{width:100%;height:100%;/*touch-action: none;*/}
         html,body,div,p,h1,span,section{margin:0;padding:0;font-family: "微软雅黑";}
-        html,body,section{width:100%;height:100%;}
+        html,body,section{width:100%;height:100%;background: #000;}
         .container{position: relative;width: 100%;margin:0 auto;overflow: hidden;}
         .wrap{width: 100%;height:100%;position: relative;}
         .wrap-body{transform:translate3d(0px,0px,0px);transition:all 200ms ease-out;}
-        .wrap1{}
-        .wrap2{}
+
         
         .change-state{position: absolute;left: 0;bottom: 0;}
         .canvas-time{position: absolute;right: 0;top: 0;}
         .canvas-pop{position: absolute;left: 20%;top: 30%;}
-        .wrap .wrap-desc{width:100%;margin:20px 0;}
         .wrap .wrap-title{text-align: center;font-size: 20px;padding:20px 0;}
         .wrap .wrap-content{text-indent:32px;font-size: 16px;margin:10px 0;}
         .wrap .wrap-contain{width:100%;text-align: center;margin:20px 0;position: absolute;bottom: 20px;}
-        .wrap .wrap-btn{width:50%;border-radius: 20px;border:1px solid #aaa;padding: 10px;}
-        .wrap .wrap-img-content{text-align: center;}
+        
+        .wrap .wrap-img-content{text-align: center;padding:40px 0;}
+        .wrap .wrap-img{transform: scale(0);transition: all 1s 2.5s;}
+
+        .wrap-desc{width:100%;margin:40px;color: #fff;padding:0 40px;transition: all 1s 3s;opacity: 0;}
+        .color-block{width:200px;height:200px;transition: all 3s;position: absolute;}
+        .block1{left: -200px;top: -200px;background: rgb(66,178,96);}
+        .block2{left: -200px;top: 400px;background: rgb(64,149,216);}
+        .block3{left: 400px;top: -200px;background: rgb(128,73,193);}
+        .block4{left: 400px;top: 400px;background: rgb(210,159,80);}
+        .wrap1 .color-block{left:48%;top:150px;width:0px;height:0px;}
+        .wrap1 .wrap-img{transform: scale(1);}
+
+        .wrap1-text{width:20px;word-wrap: break-word;color: #fff;position: absolute;border-left: 1px solid #fff;border-right: 1px solid;padding: 0 5px;text-align: center;transition: all 1s 3.5s;bottom: -200px;opacity: 0;}
+        .wrap1 .wrap1-text,.wrap1 .wrap-desc{opacity: 1;}
+        .wrap1 .w-text1{bottom: 150px;left: 38%;}
+        .wrap1 .w-text2{bottom: 100px;left: 52%;}
+
+        .wrap2-text{width:30px;font-size:24px;word-wrap: break-word;color: #fff;position: absolute;/*border-left: 1px solid #fff;border-right: 1px solid #fff;*/padding: 0 5px;text-align: center;transition: all 1s 1s;top: -400px;opacity: 0;}
+        .wrap2 .wrap2-text{opacity: 1;}
+        .wrap2 .w-text1{top: 30px;left: 10%;/*color: rgb(98,190,229);*/}
+        .wrap2 .w-text2{top: 60px;left: 20%;}
+        .wrap2-img{position: absolute;bottom: -400px;right: 0;width:100%;transition: all 1s;}
+        .wrap2 .wrap2-img{bottom:0px;} 
+        .wrap-btn{width:50%;border-radius: 20px;border:1px solid #aaa;padding: 10px;color:#fff;opacity: 0;transition: all 1s 2s;}
+        .wrap2 .wrap-btn{opacity: 1;}
+
+
+        .game{width:100%;height:100%;display: none;}
+        /*public*/
+
         .toast{position: absolute;top: 40%;left: 11%;width: 75%;padding: 10px;background: rgba(50,50,50,0.7);border-radius: 40px;color: #fff;text-align: center;word-wrap: break-word;display: none;}
-        .success{position:absolute;width: 200px;height:200px;top:30%;left:23%;background: url(../../img/success.png) no-repeat;background-size: contain;display: none;}
+        .success{position:absolute;background:url(../../img/bg.png) no-repeat;background-size:cover;width: 250px;height:150px;border:10px;color:#fff;padding:10px;top:30%;left:15%;display:none;}
+        .tototap{position: absolute;right: 10px;bottom: 10px;}
+        .rule{position:absolute;background:url(../../img/bg.png) no-repeat;background-size:cover;width: 200px;height:100px;border:10px;color:#fff;padding:10px;top:30%;left:23%;display:none;}
+        .lamp{position: absolute;top: 0;right: 0;background:url(../../img/lamp.png) no-repeat;background-size:contain;width: 50px;height:100px; }
+        
+
+        .lastpage{width: 100%;height: 100%;}
     </style>
 </head>
 <body>
@@ -43,51 +76,49 @@
 <section class="container">
     <section class="wrap-body">
 
-        <div class="wrap wrap2">
-            <p class="wrap-title">腾讯公益基金会</p>
+        <div class="wrap">
             <div class="wrap-img-content">
-                <img src="http://kg.qq.com/gtimg/music/photo/mid_album_500/l/W/0007ujpB2dTrlW.jpg" width="80%" class="wrap-img">
+                <img src="../../img/semang.png" width="80%" class="wrap-img">
             </div>
+            <div class="color-block block1"></div>
+            <div class="color-block block2"></div>
+            <div class="color-block block3"></div>
+            <div class="color-block block4"></div>
+
+            <!-- <div class="wrap1-text w-text1">每20个人就有</div>
+            <div class="wrap1-text w-text2">1个是色盲</div> -->
+
+            <div class="wrap-desc">在我们身边，<br>每29个人就有一个是色盲或色弱，<br>他们的世界没有五光十色……</div>
+        </div>
+
+
+        <div class="wrap">
+            <div class="wrap2-img">
+                <img src="../../img/wawa.png" width="100%">
+            </div>
+            <div class="wrap2-text w-text1">不再有多彩的世界</div>
+            <div class="wrap2-text w-text2">通过游戏为他们获得色盲眼镜</div>
+
             <div class="wrap-contain">
-                <span class="">基金会</span>
+                <span class="wrap-btn j_to_experience">立即体验他们的世界</span>
             </div>
-        </div>
-
-        <div class="wrap wrap2">
-            <div class="wrap-img">
-                <img src="http://shp.qpic.cn/ttkg/3393200/77b5a6eca5db34bb047e47ef83f9fafc59810aae/640" width="100%">
-            </div>
-            <div class="wrap-desc">
-                <p class="wrap-content">每20个人就有一个人是色盲每20个人就有一个人是色盲每20个人就有一个人是色盲每20个人就有一个人是色盲每20个人就有一个人是色盲</p>
-                <div class="wrap-contain">
-                    <span class="wrap-btn j_to_experience">立即体验他们的世界</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrap wrap2">
-            <div class="wrap-img">
-                <img src="http://shp.qpic.cn/ttkg/61830802/08c8acec876ba8b8047e47ef83f9fafc59813cac/640" width="100%">
-            </div>
-            <div class="wrap-desc">
-                <p class="wrap-title">每20个人就有一个人是色盲</p>
-                <p class="wrap-content">每20个人就有一个人是色盲每20个人就有一个人是色盲每20个人就有一个人是色盲每20个人就有一个人是色盲每20个人就有一个人是色盲</p>
-            </div>
-        </div>
-
-        
-
-        <div class="wrap wrap1">
-            <div class="change-state">change</div>
-            <!-- <div class="canvas-pop">点我开始</div> -->
-            <!-- <div class="canvas-time">剩余时间 <span></span>s</div> -->
-            <canvas class="videoCanvas"></canvas>
         </div>
 
     </section>
 </section>
+<div class="game">
+    <div class="change-state">change</div>
+    <!-- <div class="canvas-pop">点我开始</div> -->
+    <!-- <div class="canvas-time">剩余时间 <span></span>s</div> -->
+    <canvas class="videoCanvas"></canvas>
+</div>
+
+<div class="lastpage">
+    
+</div>
 <div class="toast j_toast"></div>
-<div class="success"></div>
+<div class="success">成功点亮<br><br>你为 <span class="rule_type">红色盲</span>患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="tototap">继续点亮</div></div>
+<div class="rule">游戏规则<br><br>找出 <span class="rule_type">红色盲</span>眼中缺失的色块，为TA点亮五彩世界. <div class="lamp"></div></div>
 <video class="video" src="" width="100" height="100" autoplay style="display:none;"></video>
 
 <script src="//kg.qq.com/gtimg/music/kg/zepto.js?_bid=2241&max_age=31104000000"></script>  
@@ -116,6 +147,13 @@ define('main',function (require,exports,module) {
             result:[],//判断游戏是否通过
             hasOpenVideo:false
         },
+        semang:{
+            1:'全色盲',
+            2:'红色盲',
+            3:'绿色盲',
+            4:'蓝色盲',
+            5:'红绿色盲'
+        },
         bind:function () {
             $(document).on('touchstart', '.change-state', function() {
                 exports.config.state++
@@ -139,14 +177,56 @@ define('main',function (require,exports,module) {
                         // alert('fail')
                     }
                 },1000);
+            }).on('touchstart', '.j_to_experience', function(event) {
+                event.preventDefault();
+                $('.wrap-body').animate({
+                    opacity: 0},
+                    500, function() {
+                        $('.container').hide();
+                        $('.game').show();
+                        $('body').css('background','#fff')
+                        exports.openMedia();
+                        
+                });
+            }).on('touchstart', '.tototap', function() {
+                $('.success').hide();
+                exports.config.state++
+            }).on('touchstart', '.toseerank', function() {
+                $('.success').hide();
+                $('.game').animate({
+                    opacity: 0},
+                    500, function() {
+                        $('.game').hide();
+                        $('.lastpage').show();
+                        $('body').css('background','#000')
+                });
             });
         },
         initData:function () {
             exports.config.$canvas.attr({width:exports.config.width,height:exports.config.height})
             exports.config.$video.attr({width:exports.config.width,height:exports.config.height})
+
+            $('.wrap').eq(0).addClass('wrap1')
+            // $('.wrap').eq(0).addClass('wrap2')
         },
         switchWrap:function (idx) {
-            console.log(idx)
+            switch (idx) {
+                case 1:
+                    $('.wrap').eq(0).addClass('wrap1')
+                    setTimeout(function(){
+                        $('.wrap').eq(1).removeClass('wrap2')
+                    },1000)
+                    break;
+                case 2:
+                    $('.wrap').eq(1).addClass('wrap2')
+                    setTimeout(function(){
+                        $('.wrap').eq(0).removeClass('wrap1')
+                    },1000)
+                    break;
+                default:
+                    // statements_def
+                    break;
+            }
             if (idx === 4) {
                 exports.openMedia();
             }
@@ -168,12 +248,19 @@ define('main',function (require,exports,module) {
         },
         drawCanvasFromVideo:function (video) {
             var ctx = exports.config.ctx;
-            exports.config.state = Math.ceil((Math.random()*10))%5 + 1;// 1-5
+            exports.config.state = 2//Math.ceil((Math.random()*10))%5 + 1;// 1-5
+
+            $('.rule').html('游戏规则<br><br>找出 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>眼中缺失的色块，为TA点亮五彩世界. <div class="lamp"></div>').show();
+            setTimeout(function () {
+                $('.rule').hide();
+            }, 5000)
+
             $('.change-state').append('-'+exports.config.state)
             exports.config.timer = setInterval(function(){
                 ctx.drawImage(video, 0, 0)
                 
                 var imgData=ctx.getImageData(0,0,exports.config.width,exports.config.height)
+                exports.config.imgData = imgData
                 switch (exports.config.state) {
                     case 1:
                         exports.convertToGray(imgData.data)
@@ -195,19 +282,21 @@ define('main',function (require,exports,module) {
                 }
                 // console.log(imgData)
                 ctx.putImageData(imgData,0,0)
-            },30);
+            },300);
         },
         getTapColor:function (opt) {
             var ctx = exports.config.ctx,
                 w = exports.config.width,
                 h = exports.config.height;
-            ctx.drawImage(exports.config.$video[0], 0, 0)
-            var imgData=ctx.getImageData(0,0,w,h)
+            var imgData=exports.config.imgData
             // console.log(imgData)
             var index = opt.x + (opt.y + 1)*w
             var r = imgData.data[index*4]
             var g = imgData.data[index*4+1]
             var b = imgData.data[index*4+2]
+            exports.drawRec(imgData.data,opt,w,h)
+            ctx.putImageData(imgData,0,0)
+
 
             // alert(r+'-'+g+'-'+b)
             $('.change-state').html(r+'-'+g+'-'+b)
@@ -276,45 +365,74 @@ define('main',function (require,exports,module) {
                 data[i*4+2] = data[i*4+2]
             }
         },
+        drawRec:function(data,opt,w,h){
+            var len=data.length
+            var y = opt.y
+            var x = opt.x
+            var pixels=len/4
+            var dataArr=new Array()
+            var long = 10
+            for(var i = y-long ; i < y+long ; i++){
+                var index = opt.x-long + (i + 1)*w
+                data[index*4] = 255
+                data[index*4+1] = 255
+                data[index*4+2] = 255
+            }
+            for(var i = y-long ; i < y+long ; i++){
+                var index = opt.x+long + (i + 1)*w
+                data[index*4] = 255
+                data[index*4+1] = 255
+                data[index*4+2] = 255
+            }
+
+            for(var i = x-long ; i < x+long ; i++){
+                var index = i + (opt.y - long)*w
+                data[index*4] = 255
+                data[index*4+1] = 255
+                data[index*4+2] = 255
+            }
+            for(var i = x-long ; i < x+long ; i++){
+                var index = i + (opt.y + long)*w
+                data[index*4] = 255
+                data[index*4+1] = 255
+                data[index*4+2] = 255
+            }
+
+        },
         judgeGame:function(opt){
             // console.log(opt)
             var ok = false;
             switch (exports.config.state) {
                 case 1://gray
-                    if (opt.r > 200 && opt.g < 80 && opt.b < 80)exports.config.result.push(1)
-                    if (opt.r < 90 && opt.g >150 && opt.b < 90)exports.config.result.push(2)
-                    if (opt.r < 90 && opt.g < 90 && opt.b > 160)exports.config.result.push(3)
+                    if (opt.r > 180 && opt.g < 100 && opt.b < 100)exports.config.result.push(1)
+                    if (opt.r < 100 && opt.g >150 && opt.b < 100)exports.config.result.push(2)
+                    if (opt.r < 100 && opt.g < 100 && opt.b > 160)exports.config.result.push(3)
 
                     if (exports.config.result.length === 3 ){
-                        alert('恭喜治愈了一位全色盲患者')
                         ok = true
                     }
                     break;
                 case 2://red
-                    if (opt.r > 200 && opt.g < 80 && opt.b < 80) {
-                        alert('恭喜治愈了一位红色盲患者')
+                    if (opt.r > 200 && opt.g < 100 && opt.b < 100) {
                         ok = true
                     }
                     break;
                 case 3://green
-                    if (opt.r < 90 && opt.g >150 && opt.b < 90) {
-                        alert('恭喜治愈了一位绿色盲患者')
+                    if (opt.r < 100 && opt.g >150 && opt.b < 100) {
                         exports.config.state = 6
                         ok = true
                     }
                     break;
                 case 4://blue
-                    if (opt.r < 90 && opt.g < 90 && opt.b > 160) {
-                        alert('恭喜治愈了一位蓝色盲患者')
+                    if (opt.r < 100 && opt.g < 100 && opt.b > 160) {
                         ok = true
                     }
                     break;
                 case 5://red green
-                    if (opt.r > 200 && opt.g < 80 && opt.b < 80)exports.config.result.push(1)
-                    if (opt.r < 90 && opt.g >150 && opt.b < 90)exports.config.result.push(2)
+                    if (opt.r > 180 && opt.g < 100 && opt.b < 100)exports.config.result.push(1)
+                    if (opt.r < 100 && opt.g >150 && opt.b < 100)exports.config.result.push(2)
 
                     if (exports.config.result.length === 2 ){
-                        alert('恭喜治愈了一位红绿色盲患者')
                         ok = true
                     }
                     break;
@@ -323,6 +441,7 @@ define('main',function (require,exports,module) {
                 $('.j_toast').text('所选颜色错误，请试试其他颜色看看能否治愈当前色盲患者哦').show();
                 setTimeout(function(){$('.j_toast').hide();} , 2000)
             }else {
+                $('.success').html('成功点亮<br><br>你为 <span class="rule_type">红色'+exports.semang[exports.config.state]+'</span>患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="'+(exports.config.state == 4 ? 'toseerank' : "tototop")+'">'+(exports.config.state == 4 ? '查看排名' : "继续点亮")+'</div>').show();
                 exports.config.state = 6
             }
         }
