@@ -79,7 +79,8 @@ define('main',function (require,exports,module) {
             $canvas:$('.videoCanvas'),
             ctx : $('.videoCanvas')[0].getContext('2d'),
             state:1,
-            totalTime:5
+            totalTime:5,
+            result:[]//判断游戏是否通过
         },
         bind:function () {
             $(document).on('touchstart', '.change-state', function() {
@@ -125,11 +126,12 @@ define('main',function (require,exports,module) {
         },
         drawCanvasFromVideo:function (video) {
             var ctx = exports.config.ctx;
+            exports.config.state = Math.ceil((Math.random()*10))%5 + 1;// 1-5
+            $('.change-state').append('-'+exports.config.state)
             exports.config.timer = setInterval(function(){
                 ctx.drawImage(video, 0, 0)
                 
                 var imgData=ctx.getImageData(0,0,exports.config.width,exports.config.height)
-                exports.config.state = Math.ceil((Math.random()*10))%5 + 1;// 1-5
                 switch (exports.config.state) {
                     case 1:
                         exports.convertToGray(imgData.data)
@@ -166,8 +168,8 @@ define('main',function (require,exports,module) {
             var b = imgData.data[index*4+2]
 
             // alert(r+'-'+g+'-'+b)
-
-            console.log(r,g,b)
+            $('.change-state').append(r+'-'+g+'-'+b)
+            exports.judgeGame({r:r,g:g,b:b});
         },
         convertToGray:function (data) {//灰色 最严重
             var len=data.length
@@ -231,8 +233,43 @@ define('main',function (require,exports,module) {
                 data[i*4+2] = data[i*4+2]
             }
         },
-        judgeGame:function(){
-            
+        judgeGame:function(opt){
+            console.log(opt)
+            switch (exports.config.state) {
+                case 1://gray
+                    if (opt.r > 200 && opt.g < 80 && opt.b < 80)exports.config.result.push(1)
+                    if (opt.r < 80 && opt.g >200 && opt.b < 80)exports.config.result.push(1)
+                    if (opt.r < 80 && opt.g < 80 && opt.b > 200)exports.config.result.push(1)
+
+                    if (exports.config.result.length === 3 ){
+                        alert('恭喜治愈了一位全色盲患者')
+                    }
+                    break;
+                case 2://red
+                    if (opt.r > 200 && opt.g < 80 && opt.b < 80) {
+                        alert('恭喜治愈了一位红色盲患者')
+                    }
+                    break;
+                case 3://green
+                    if (opt.r < 80 && opt.g >200 && opt.b < 80) {
+                        alert('恭喜治愈了一位绿色盲患者')
+                    }
+                    break;
+                case 4://blue
+                    if (opt.r < 80 && opt.g < 80 && opt.b > 200) {
+                        alert('恭喜治愈了一位蓝色盲患者')
+                    }
+                    break;
+                    break;
+                case 5://red green
+                    if (opt.r > 200 && opt.g < 80 && opt.b < 80)exports.config.result.push(1)
+                    if (opt.r < 80 && opt.g >200 && opt.b < 80)exports.config.result.push(1)
+
+                    if (exports.config.result.length === 2 ){
+                        alert('恭喜治愈了一位红绿色盲患者')
+                    }
+                    break;
+            }
         }
     }
 })
