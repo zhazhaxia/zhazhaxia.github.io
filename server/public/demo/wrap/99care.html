@@ -15,7 +15,7 @@
     <!--如果该页面只适合在手机上进行浏览，请添加以下代码-->
     <meta name="applicable-device" content="mobile">
     <style type="text/css">
-        *{ touch-action: none; }
+        html,body{ touch-action: none; }
         html,body{width:100%;height:100%;/*touch-action: none;*/}
         html,body,div,p,h1,span,section{margin:0;padding:0;font-family: "微软雅黑";}
         html,body,section{width:100%;height:100%;}
@@ -40,6 +40,7 @@
     <section class="wrap-body">
         <div class="wrap wrap1">
             <div class="change-state">change</div>
+            <div class="canvas-time">00:00</div>
             <canvas class="videoCanvas"></canvas>
         </div>
         <div class="wrap wrap2">
@@ -76,7 +77,7 @@
 <script type="text/javascript">
 define('main',function (require,exports,module) {
     var wrap = require('wrap')
-        
+    
     navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia;
     exports = module.exports = {
         init:function () {
@@ -95,13 +96,13 @@ define('main',function (require,exports,module) {
             state:1
         },
         bind:function () {
-            $(document).on('click', function() {
-                // clearInterval(exports.config.timer)               
-            }).on('click', '.change-state', function() {
+            $(document).on('tap', '.change-state', function() {
                 exports.config.state++
                 if (exports.config.state > 5) exports.config.state = 1;
-            }).on('click', '.videoCanvas', function(e) {
-                exports.getTapColor({x:e.clientX,y:e.clientY});
+            }).on('touchstart', '.videoCanvas', function(e) {
+                e.preventDefault()
+                // console.log(e)
+                exports.getTapColor({x:~~e.targetTouches[0].clientX,y:~~e.targetTouches[0].clientY});
             });
         },
         initData:function () {
@@ -157,11 +158,14 @@ define('main',function (require,exports,module) {
                 h = exports.config.height;
             ctx.drawImage(exports.config.$video[0], 0, 0)
             var imgData=ctx.getImageData(0,0,w,h)
+            console.log(imgData)
             var index = opt.x + (opt.y + 1)*w
             var r = imgData.data[index*4]
             var g = imgData.data[index*4+1]
             var b = imgData.data[index*4+2]
+
             alert(r+'-'+g+'-'+b)
+
             console.log(r,g,b)
         },
         convertToGray:function (data) {//灰色
@@ -220,7 +224,7 @@ define('wrap',function (require,exports,module) {
     exports = module.exports = {
         init:function (opt) {
             Object.assign(option,opt || {})
-            console.log(option)
+            // console.log(option)
             exports.initWrap()
             exports.bind();
         },
