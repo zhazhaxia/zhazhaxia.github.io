@@ -15,7 +15,7 @@
     <!--如果该页面只适合在手机上进行浏览，请添加以下代码-->
     <meta name="applicable-device" content="mobile">
     <style type="text/css">
-        /** { touch-action: none; }*/
+        *{ touch-action: none; }
         html,body{width:100%;height:100%;/*touch-action: none;*/}
         html,body,div,p,h1,span,section{margin:0;padding:0;font-family: "微软雅黑";}
         html,body,section{width:100%;height:100%;}
@@ -161,7 +161,7 @@ define('main',function (require,exports,module) {
             var r = imgData.data[index*4]
             var g = imgData.data[index*4+1]
             var b = imgData.data[index*4+2]
-
+            alert(r+'-'+g+'-'+b)
             console.log(r,g,b)
         },
         convertToGray:function (data) {//灰色
