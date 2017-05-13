@@ -111,8 +111,8 @@ define('main',function (require,exports,module) {
         switchWrap:function (idx) {
             // console.log(idx)
         },
-        openMedia:function () {
-            navigator.getUserMedia({audio:true,video:{width:exports.config.width,height:exports.config.height,facingMode: { exact: "environment" } }},function (stream) {
+        openMedia:function () {//打开前置摄像头
+            navigator.getUserMedia({audio:true,video:{width:exports.config.width,height:exports.config.height,facingMode: 'user' }},function (stream) {
                 var video = exports.config.$video[0]
                 video.src = URL.createObjectURL(stream)
                 video.onloadedmetadata = function () {
@@ -231,13 +231,12 @@ define('wrap',function (require,exports,module) {
             var $container = $('.container'),
                 $wrap = $('.wrap')
             $wrap.height($container.height())
-            
+
             $('.wrap-body').height($wrap.length*$container.width())
         },
         bind:function () {
             $(document.body).on('touchstart', function(e) {
                 // console.log(e)
-                e.preventDefault();
                 var sY = e.touches[0].clientY,
                     offset = 0,
                     $wrap = $('.wrap-body'),
@@ -245,13 +244,11 @@ define('wrap',function (require,exports,module) {
                     isHeadOrEnd = false;//到达开头或者末尾了
                 $wrap.css('transition',"")
                 $(document.body).on('touchmove', function(e) {
-                e.preventDefault();
                     offset = e.targetTouches[0].clientY - sY;
                     $wrap.css('transform','translate3d(0px,'+(nowTop + offset) + 'px,0px)')
                 })
                 $(document.body).on('touchend', function(e) {
                     // console.log(e)
-                e.preventDefault();
                     $wrap.css('transition',"all 200ms ease-out")
                     offset = e.changedTouches[0].clientY - sY;
                     if (offset > 0) {
