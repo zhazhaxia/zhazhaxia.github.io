@@ -33,6 +33,8 @@
         .wrap2{background-color: #e9d;}
 
         .change-state{position: absolute;left: 0;bottom: 0;}
+        .canvas-time{position: absolute;right: 0;top: 0;}
+        .canvas-pop{position: absolute;left: 20%;top: 30%;}
     </style>
 </head>
 <body>
@@ -40,7 +42,8 @@
     <section class="wrap-body">
         <div class="wrap wrap1">
             <div class="change-state">change</div>
-            <div class="canvas-time">00:00</div>
+            <div class="canvas-pop">点我开始</div>
+            <div class="canvas-time">剩余时间 <span></span>s</div>
             <canvas class="videoCanvas"></canvas>
         </div>
         <div class="wrap wrap2">
@@ -49,24 +52,6 @@
             <p>aa</p>
             <p>aa</p>
 
-        </div>
-        <div class="wrap wrap1">
-            <p>aa</p>
-            <p>aa</p>
-            <p>aa</p>
-            <p>aa</p>
-        </div>
-        <div class="wrap wrap2">
-            <p>aa</p>
-            <p>aa</p>
-            <p>aa</p>
-            <p>aa</p>
-        </div>
-        <div class="wrap wrap1">
-            <p>aa</p>
-            <p>aa</p>
-            <p>aa</p>
-            <p>aa</p>
         </div>
     </section>
 </section>
@@ -93,16 +78,29 @@ define('main',function (require,exports,module) {
             $video :$('.video'),
             $canvas:$('.videoCanvas'),
             ctx : $('.videoCanvas')[0].getContext('2d'),
-            state:1
+            state:1,
+            totalTime:5
         },
         bind:function () {
-            $(document).on('tap', '.change-state', function() {
+            $(document).on('touchstart', '.change-state', function() {
                 exports.config.state++
-                if (exports.config.state > 5) exports.config.state = 1;
+                console.log(exports.config.state)
+                if (exports.config.state > 6) exports.config.state = 1;
             }).on('touchstart', '.videoCanvas', function(e) {
                 e.preventDefault()
+                e.stopPropagation()
                 // console.log(e)
                 exports.getTapColor({x:~~e.targetTouches[0].clientX,y:~~e.targetTouches[0].clientY});
+            }).on('touchstart', '.canvas-pop', function() {
+                $(this).hide();
+                var timer = setInterval(function(){
+                    exports.config.totalTime--
+                    $('.canvas-time span').text(exports.config.totalTime)
+                    if (exports.config.totalTime === 0) {
+                        clearInterval(timer)
+                        alert('fail')
+                    }
+                },1000);
             });
         },
         initData:function () {
@@ -131,7 +129,7 @@ define('main',function (require,exports,module) {
                 ctx.drawImage(video, 0, 0)
                 
                 var imgData=ctx.getImageData(0,0,exports.config.width,exports.config.height)
-
+                exports.config.state = Math.ceil((Math.random()*10))%5 + 1;// 1-5
                 switch (exports.config.state) {
                     case 1:
                         exports.convertToGray(imgData.data)
@@ -143,9 +141,12 @@ define('main',function (require,exports,module) {
                         exports.convertToNoGreen(imgData.data)
                         break;
                     case 4:
-                        exports.convertRedGreen(imgData.data)
+                        exports.convertNoBlue(imgData.data)
                         break;
                     case 5:
+                        exports.convertRedToGreen(imgData.data)
+                        break;
+                    case 6:
                         break;
                 }
                 // console.log(imgData)
@@ -158,17 +159,17 @@ define('main',function (require,exports,module) {
                 h = exports.config.height;
             ctx.drawImage(exports.config.$video[0], 0, 0)
             var imgData=ctx.getImageData(0,0,w,h)
-            console.log(imgData)
+            // console.log(imgData)
             var index = opt.x + (opt.y + 1)*w
             var r = imgData.data[index*4]
             var g = imgData.data[index*4+1]
             var b = imgData.data[index*4+2]
 
-            alert(r+'-'+g+'-'+b)
+            // alert(r+'-'+g+'-'+b)
 
             console.log(r,g,b)
         },
-        convertToGray:function (data) {//灰色
+        convertToGray:function (data) {//灰色 最严重
             var len=data.length
             var pixels=len/4
             var dataArr=new Array()
@@ -192,7 +193,7 @@ define('main',function (require,exports,module) {
             var pixels=len/4
             var dataArr=new Array()
             for(var i=0;i<pixels;i++){
-                data[i*4] = 0
+                data[i*4] =50
                 data[i*4+1] = data[i*4+1]
                 data[i*4+2] = data[i*4+2]
             }
@@ -203,19 +204,35 @@ define('main',function (require,exports,module) {
             var dataArr=new Array()
             for(var i=0;i<pixels;i++){
                 data[i*4] = data[i*4]
-                data[i*4+1] = 0
+                data[i*4+1] = 50
                 data[i*4+2] = data[i*4+2]
             }
         },
-        convertRedGreen:function (data) {//红绿交换
+        convertNoBlue:function (data) {//去蓝
             var len=data.length
             var pixels=len/4
             var dataArr=new Array()
             for(var i=0;i<pixels;i++){
-                data[i*4] = data[i*4+1]
+                data[i*4] = data[i*4]
+                data[i*4+1] = data[i*4+1]
+                data[i*4+2] = 50
+            }
+        },
+        convertRedToGreen:function (data) {//红绿交换
+            var len=data.length
+            var pixels=len/4
+            var dataArr=new Array()
+            for(var i=0;i<pixels;i++){
+                data[i*4] = data[i*4]
+                data[i*4+1] = data[i*4+1]
+                data[i*4+2] = 50
+                data[i*4] = data[i*4 + 1]
                 data[i*4+1] = data[i*4]
                 data[i*4+2] = data[i*4+2]
             }
+        },
+        judgeGame:function(){
+            
         }
     }
 })
@@ -242,6 +259,7 @@ define('wrap',function (require,exports,module) {
             $(document.body).on('touchstart', function(e) {
                 // console.log(e)
                 e.preventDefault();
+                e.stopPropagation()
                 var sY = e.touches[0].clientY,
                     offset = 0,
                     $wrap = $('.wrap-body'),
