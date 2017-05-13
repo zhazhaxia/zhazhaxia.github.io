@@ -31,7 +31,7 @@
         .wrap .wrap-content{text-indent:32px;font-size: 16px;margin:10px 0;}
         .wrap .wrap-contain{width:100%;text-align: center;margin:20px 0;position: absolute;bottom: 20px;}
         
-        .wrap .wrap-img-content{text-align: center;padding:30px 0;}
+        .wrap .wrap-img-content{text-align: center;padding:25px 0;}
         .wrap .wrap-img{transform: scale(0);transition: all 1s 2.5s;}
 
         .wrap-desc{width:100%;margin:40px;color: #fff;padding:0 40px;transition: all 1s 3s;opacity: 0;}
@@ -40,7 +40,7 @@
         .block2{left: -200px;top: 400px;background: rgb(64,149,216);}
         .block3{left: 400px;top: -200px;background: rgb(128,73,193);}
         .block4{left: 400px;top: 400px;background: rgb(210,159,80);}
-        .wrap1 .color-block{left:48%;top:150px;width:0px;height:0px;}
+        .wrap1 .color-block{left:50%;top:190px;width:0px;height:0px;}
         .wrap1 .wrap-img{transform: scale(1);}
 
         .wrap1-text{width:20px;word-wrap: break-word;color: #fff;position: absolute;border-left: 1px solid #fff;border-right: 1px solid;padding: 0 5px;text-align: center;transition: all 1s 3.5s;bottom: -200px;opacity: 0;}
@@ -63,7 +63,7 @@
 
         .toast{position: absolute;top: 40%;left: 11%;width: 75%;padding: 10px;background: rgba(50,50,50,0.7);border-radius: 40px;color: #fff;text-align: center;word-wrap: break-word;display: none;}
         .success{position:absolute;background:url(../../img/bg.png) no-repeat;background-size:cover;width: 250px;height:150px;border:10px;color:#fff;padding:10px;top:30%;left:15%;display:none;}
-        .tototap{position: absolute;right: 10px;bottom: 10px;}
+        .tototap,.toseerank{position: absolute;right: 10px;bottom: 10px;}
         .rule{position:absolute;background:url(../../img/bg.png) no-repeat;background-size:cover;width: 200px;height:100px;border:10px;color:#fff;padding:10px;top:30%;left:23%;display:none;}
         .lamp{position: absolute;top: 0;right: 0;background:url(../../img/lamp.png) no-repeat;background-size:contain;width: 50px;height:100px; }
         
@@ -116,10 +116,10 @@
 </div>
 
 <div class="lastpage" style="display:none;">
-    <p class="title">您已经成为第<br><span style="font-size:24px;color:rgb(100,174,216);">5765675</span><br>位色盲患者的点亮者</p>
+    <p class="title">您已经成为第<br><span class="num_you" style="font-size:24px;color:rgb(100,174,216);">5765675</span><br>位色盲患者的点亮者</p>
 
     <p class="knowmore">参与公益众筹</p>
-    <p class="done">本活动已经为<span>68743</span>位色盲患者提供色盲眼镜</p>
+    <p class="done">本活动已经为<span class="num_eyes">68743</span>位色盲患者提供色盲眼镜</p>
     <div class="llamp"></div>
     <div class="limg">
         <img src="../../img/logo.png" width="80%">
@@ -199,7 +199,7 @@ define('main',function (require,exports,module) {
                 });
             }).on('touchstart', '.tototap', function() {
                 $('.success').hide();
-                exports.config.state++
+                exports.config.state= ~~$(this).attr('data-state')
             }).on('touchstart', '.toseerank', function() {
                 $('.success').hide();
                 $('.game').animate({
@@ -208,7 +208,11 @@ define('main',function (require,exports,module) {
                         $('.game').hide();
                         $('.lastpage').show();
                         $('body').css('background','#000')
+
+                        $('.num_eyes').text(Math.ceil(Math.random()*10000000))
+                        $('.num_you').text(Math.ceil(Math.random()*10000000))
                 });
+
             });
         },
         initData:function () {
@@ -411,46 +415,48 @@ define('main',function (require,exports,module) {
         judgeGame:function(opt){
             // console.log(opt)
             var ok = false;
+            var min = 100 ,max = 150;
             switch (exports.config.state) {
                 case 1://gray
-                    if (opt.r > 180 && opt.g < 100 && opt.b < 100)exports.config.result.push(1)
-                    if (opt.r < 100 && opt.g >150 && opt.b < 100)exports.config.result.push(2)
-                    if (opt.r < 100 && opt.g < 100 && opt.b > 160)exports.config.result.push(3)
+                    if (opt.r > max && opt.g < min && opt.b < min)exports.config.result.push(1)
+                    if (opt.r < min && opt.g >max && opt.b < min)exports.config.result.push(2)
+                    if (opt.r < min && opt.g < min && opt.b > max)exports.config.result.push(3)
 
                     if (exports.config.result.length === 3 ){
                         ok = true
                     }
                     break;
                 case 2://red
-                    if (opt.r > 200 && opt.g < 100 && opt.b < 100) {
+                    if (opt.r > max && opt.g < min && opt.b < min) {
                         ok = true
                     }
                     break;
                 case 3://green
-                    if (opt.r < 100 && opt.g >150 && opt.b < 100) {
+                    if (opt.r < min && opt.g >max && opt.b < min) {
                         exports.config.state = 6
                         ok = true
                     }
                     break;
                 case 4://blue
-                    if (opt.r < 100 && opt.g < 100 && opt.b > 160) {
+                    if (opt.r < min && opt.g < min && opt.b > max) {
                         ok = true
                     }
                     break;
                 case 5://red green
-                    if (opt.r > 180 && opt.g < 100 && opt.b < 100)exports.config.result.push(1)
-                    if (opt.r < 100 && opt.g >150 && opt.b < 100)exports.config.result.push(2)
+                    if (opt.r > max && opt.g < min && opt.b < min)exports.config.result.push(1)
+                    if (opt.r < min && opt.g >max && opt.b < min)exports.config.result.push(2)
 
                     if (exports.config.result.length === 2 ){
                         ok = true
                     }
                     break;
             }
+            // ok=true
             if (!ok) {
                 $('.j_toast').text('所选颜色错误，请试试其他颜色看看能否治愈当前色盲患者哦').show();
                 setTimeout(function(){$('.j_toast').hide();} , 2000)
             }else {
-                $('.success').html('成功点亮<br><br>你为 <span class="rule_type">红色'+exports.semang[exports.config.state]+'</span>患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="'+(exports.config.state == 4 ? 'toseerank' : "tototop")+'">'+(exports.config.state == 4 ? '查看排名' : "继续点亮")+'</div>').show();
+                $('.success').html('成功点亮<br><br>你为 <span class="rule_type">红色'+exports.semang[exports.config.state]+'</span>患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="'+(exports.config.state == 4 ? 'toseerank' : "tototap")+'" data-state="'+(exports.config.state+1)+'">'+(exports.config.state == 4 ? '查看排名' : "继续点亮")+'</div>').show();
                 exports.config.state = 6
             }
         }
