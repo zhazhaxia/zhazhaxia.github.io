@@ -61,7 +61,7 @@
         .game{width:100%;height:100%;display: none;}
         /*public*/
 
-        .toast{position: absolute;top: 10%;left: 11%;width: 75%;padding: 10px;background: rgba(50,50,50,0.7);border-radius: 40px;color: #fff;text-align: center;word-wrap: break-word;display: none;}
+        .toast{position: absolute;top: 5%;left: 11%;width: 75%;padding: 10px;background: rgba(50,50,50,0.7);border-radius: 40px;color: #fff;text-align: center;word-wrap: break-word;display: none;}
         .success{position:absolute;background:url(../../img/bg.png) no-repeat;background-size:cover;width: 250px;height:150px;border:10px;color:#fff;padding:10px;top:30%;left:9%;display:none;border-radius: 10px;}
         .tototap,.toseerank{position: absolute;right: 10px;bottom: 10px;}
         .rule{position:absolute;background:url(../../img/bg.png) no-repeat;background-size:cover;width: 200px;height:100px;border:10px;color:#fff;padding:10px;top:30%;left:18%;display:none;border-radius: 10px;}
@@ -168,9 +168,9 @@ define('main',function (require,exports,module) {
         },
         semang:{
             1:'全色盲',
-            2:'红色盲',
-            3:'绿色盲',
-            4:'蓝色盲',
+            2:'<span style="color:red;font-size:20px;">红色盲</span>',
+            3:'<span style="color:red;font-size:20px;">绿色盲</span>',
+            4:'<span style="color:red;font-size:20px;">蓝色盲</span>',
             5:'红绿色盲',
             6:'色盲'
         },
@@ -221,7 +221,7 @@ define('main',function (require,exports,module) {
                 $('.rule').html('游戏规则<br><br>找出 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>眼中缺失的色块，为TA点亮五彩世界. ').show();
                 setTimeout(function () {
                     $('.rule').hide();
-                }, 5000)
+                }, 3000)
             }).on('touchstart', '.toseerank', function() {
                 $('.success').hide();
                 $('.game').animate({
@@ -479,7 +479,7 @@ define('main',function (require,exports,module) {
             // ok=true
             if (!ok) {
                 $('.j_toast').html('所选颜色错误<br>请继续为'+exports.semang[exports.config.state]+'患者找到TA缺失的颜色哦').show();
-                setTimeout(function(){$('.j_toast').hide();} , 3000)
+                setTimeout(function(){$('.j_toast').hide();} , 2500)
             }else {
                 $('.success').html('成功点亮<br><br>你为 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="'+(exports.config.state == 4 ? 'toseerank' : "tototap")+'" data-state="'+(exports.config.state+1)+'">'+(exports.config.state == 4 ? '查看排名' : "继续点亮")+'</div>').show();
                 exports.config.state = 6
