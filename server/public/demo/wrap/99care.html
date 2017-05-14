@@ -167,12 +167,12 @@ define('main',function (require,exports,module) {
             hasOpenVideo:false
         },
         semang:{
-            1:'全色盲',
-            2:'<span style="font-size:20px;font-weight:600;">红色盲</span>',
-            3:'<span style="font-size:20px;font-weight:600;">绿色盲</span>',
-            4:'<span style="font-size:20px;font-weight:600;">蓝色盲</span>',
-            5:'红绿色盲',
-            6:'色盲'
+            1:'全',
+            2:'<span style="font-size:20px;font-weight:600;">红</span>',
+            3:'<span style="font-size:20px;font-weight:600;">绿</span>',
+            4:'<span style="font-size:20px;font-weight:600;">蓝</span>',
+            5:'红绿',
+            6:''
         },
         bind:function () {
             $(document).on('touchstart', '.change-state', function() {
@@ -218,7 +218,7 @@ define('main',function (require,exports,module) {
                 $('.success').hide();
                 exports.config.state= ~~$(this).attr('data-state')
 
-                $('.rule').html('游戏规则<br><br>找出 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>眼中缺失的色块，为TA点亮五彩世界. ').show();
+                $('.rule').html('游戏规则<br><br>找出 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>色盲眼中缺失的色块，为TA点亮五彩世界. ').show();
                 setTimeout(function () {
                     $('.rule').hide();
                 }, 3000)
@@ -231,8 +231,8 @@ define('main',function (require,exports,module) {
                         $('.lastpage').show();
                         $('body').css('background','#000')
                         var num_rnd=Math.ceil(Math.random()*1000000)
-                        $('.num_eyes').text(num_rnd)
-                        $('.num_you').text(Math.ceil(num_rnd/100))
+                        $('.num_eyes').text(Math.ceil(num_rnd/100))
+                        $('.num_you').text(num_rnd)
                 });
 
             });
@@ -285,7 +285,7 @@ define('main',function (require,exports,module) {
             var ctx = exports.config.ctx;
             exports.config.state = 2//Math.ceil((Math.random()*10))%5 + 1;// 1-5
 
-            $('.rule').html('游戏规则<br><br>找出 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>眼中缺失的色块，为TA点亮五彩世界. ').show();
+            $('.rule').html('游戏规则<br><br>找出 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>色盲眼中缺失的色块，为TA点亮五彩世界. ').show();
             setTimeout(function () {
                 $('.rule').hide();
             }, 5000)
@@ -478,10 +478,10 @@ define('main',function (require,exports,module) {
             }
             // ok=true
             if (!ok) {
-                $('.j_toast').html('所选颜色错误<br>请继续为'+exports.semang[exports.config.state]+'患者找到TA缺失的颜色哦').show();
+                $('.j_toast').html('所选颜色错误<br>请继续为'+exports.semang[exports.config.state]+'色盲患者找到TA缺失的颜色哦').show();
                 setTimeout(function(){$('.j_toast').hide();} , 2500)
             }else {
-                $('.success').html('成功点亮<br><br>你为 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="'+(exports.config.state == 4 ? 'toseerank' : "tototap")+'" data-state="'+(exports.config.state+1)+'">'+(exports.config.state == 4 ? '查看排名' : "继续点亮")+'</div>').show();
+                $('.success').html('成功点亮<br><br>你为 <span class="rule_type">'+exports.semang[exports.config.state]+'</span>色盲患者点亮了五彩世界<br>继续为其他色盲患者点亮世界.  <div class="'+(exports.config.state == 4 ? 'toseerank' : "tototap")+'" data-state="'+(exports.config.state+1)+'">'+(exports.config.state == 4 ? '查看排名' : "继续点亮")+'</div>').show();
                 exports.config.state = 6
             }
         }
