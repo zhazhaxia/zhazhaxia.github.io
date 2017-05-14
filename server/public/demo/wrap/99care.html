@@ -199,8 +199,8 @@ define('main',function (require,exports,module) {
                 },1000);
             }).on('touchstart', '.j_to_experience', function(event) {
                 event.preventDefault();
-                alert(JSON.stringify($.platform))
-                if ($.platform.name == "safari") {
+                // alert(JSON.stringify($.platform))
+                if ($.platform.name !== "chrome") {
                     alert('由于IOS系统限制了H5调用摄像头的权限，请选择android手机进行AR游戏的体验')
                     return;
                 }
