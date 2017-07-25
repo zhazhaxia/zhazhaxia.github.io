@@ -5,4 +5,4 @@
 - 大三为了找工作做的单页面音乐网站，位于Janelove/， [简爱音乐网](http://zhazhaxia.github.io/janelove/)跟[简爱音乐网m站](http://zhazhaxia.github.io/janelove/)
 
 * 测试
-* 测试
+* 测试[kg](kg.qq.com)
