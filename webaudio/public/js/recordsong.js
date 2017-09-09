@@ -59,7 +59,8 @@ define('./js/recordsong',function( require, exports, module){
 
                 a.src = url;
                 a.onload=function () {
-                   a.play(); 
+                   a.play();
+                   alert(a.src) 
                 }
         	}
         	exports.mediaRecorder.ondataavailable = function (e) {
