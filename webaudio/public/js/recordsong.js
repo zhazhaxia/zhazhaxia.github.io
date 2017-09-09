@@ -53,7 +53,7 @@ define('./js/recordsong',function( require, exports, module){
         	exports.mediaRecorder.onstop = function (e) {
       			var blob = new Blob(exports.chunk, { 'type' : 'audio/wav;' }),
       			    url = window.URL.createObjectURL(blob);
-                alert(url)
+                alert(blob.size)
         		exports.audio.src = url;
         	}
         	exports.mediaRecorder.ondataavailable = function (e) {
