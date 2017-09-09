@@ -57,12 +57,17 @@ define('./js/recordsong',function( require, exports, module){
 
                 var a = new Audio();
 
-                a.src = 'https://zhazhaxia.github.io/webaudio/public/media/niunai.mp3';
+                a.src = url;
                 alert(a.src)
                 setTimeout(function () {
                     alert(a.src)
                     a.play();
-                    
+                    exports.audio.src = url;
+
+                    setTimeout(function () {
+                        exports.audio.play()
+                        
+                    }, 5000)
                 }, 5000)
 
         	}
