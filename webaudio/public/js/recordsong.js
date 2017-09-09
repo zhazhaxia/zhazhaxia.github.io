@@ -55,20 +55,6 @@ define('./js/recordsong',function( require, exports, module){
       			    url = window.URL.createObjectURL(blob);
         		exports.audio.src = url;
 
-                var a = new Audio();
-
-                a.src = url;
-                alert(a.src)
-                setTimeout(function () {
-                    alert(a.src)
-                    a.play();
-                    exports.audio.src = url;
-
-                    setTimeout(function () {
-                        exports.audio.play()
-                        
-                    }, 5000)
-                }, 5000)
 
         	}
         	exports.mediaRecorder.ondataavailable = function (e) {
