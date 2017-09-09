@@ -53,11 +53,12 @@ define('./js/recordsong',function( require, exports, module){
         	exports.mediaRecorder.onstop = function (e) {
       			var blob = new Blob(exports.chunk, { 'type' : 'audio/wav;' }),
       			    url = window.URL.createObjectURL(blob);
-        		exports.audio.src = 'https://zhazhaxia.github.io/webaudio/public/media/niunai.mp3';;
+        		exports.audio.src = url;
 
                 var a = new Audio();
 
                 a.src = 'https://zhazhaxia.github.io/webaudio/public/media/niunai.mp3';
+                alert(a.src)
                 setTimeout(function () {
                     alert(a.src)
                     a.play();
