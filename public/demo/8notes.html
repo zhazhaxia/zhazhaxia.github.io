@@ -228,6 +228,7 @@ define("main",function (require, exports, module) {
                     console.log("lost!!!!!!!!")
                     $('.title').text('啊！掉坑了！重新来一遍吧！')
                     exports.config.gameEnd = true;
+                    exports.stopBarrier()
                     $notes.stop(true).animate({bottom:0},500)
                     setTimeout(function () {
                         location.href = "https://zhazhaxia.github.io/public/demo/8notes.html?a="+new Date().getTime();
