@@ -178,12 +178,14 @@ define("main",function (require, exports, module) {
                 exports.config.vol = 0;
             }
         },
+        walkNum:0.5,
+        jumpNum:5,
         letsGo:function (vol) {//达到条件跳跃
             console.log(vol)
             //$('.ttt').text(vol)
-            if (vol > 1 ) {//走
+            if (vol > exports.walkNum ) {//走
                 exports.moveBarrier();
-                if (vol > 8) {//跳
+                if (vol > exports.jumpNum) {//跳
                     console.log('jump')
                     exports.jumpNotes();
                 }
