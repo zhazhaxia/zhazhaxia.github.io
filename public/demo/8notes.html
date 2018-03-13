@@ -227,6 +227,7 @@ define("main",function (require, exports, module) {
                 if(left <= 80 && right >= 160){
                     console.log("lost!!!!!!!!")
                     $('.title').text('啊！掉坑了！重新来一遍吧！')
+                    alert("啊！掉坑了！你挂了……")
                     exports.config.gameEnd = true;
                     exports.stopBarrier()
                     $notes.stop(true).animate({bottom:0},500)
